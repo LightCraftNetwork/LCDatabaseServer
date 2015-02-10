@@ -15,14 +15,14 @@ public class CommandInsert extends Command {
 		if (args.length == 0) {
 			return ("Usage: insert category key value (Please use _ in place of spaces.)");
 		}
-		try{
-		String category = args[0].toLowerCase();
-		String key = args[1];
-		String value = args[2];
-		UtilFile.save(category, key, value);
-		return ("SUCCESS: Inserting " + value + " into " + category
-				+ " with key " + key);
-		}catch(Exception ex){
+		try {
+			String category = args[0].toLowerCase();
+			String key = args[1];
+			String value = args[2];
+			UtilFile.save(category, key, value);
+			return ("SUCCESS: Inserting " + value + " into " + category
+					+ " with key " + key);
+		} catch (Exception ex) {
 			return "FAILED: An error occured, please try again. || Usage: insert category key value (Please use _ in place of spaces.)";
 		}
 	}

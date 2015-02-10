@@ -17,15 +17,16 @@ public class CommandHelp extends Command {
 	public String runCommand(boolean isLocal, String[] args) {
 		String string = "---Start of help transcript---\n";
 		ArrayList<String> helpKeys = new ArrayList<String>();
-		for(Command command : CommandManager.getInstance().commands){
-			helpKeys.add(command.getName() + " : " + command.getDescription() + "\n");
+		for (Command command : CommandManager.getInstance().commands) {
+			helpKeys.add(command.getName() + " : " + command.getDescription()
+					+ "\n");
 		}
 		Collections.sort(helpKeys);
-		for(String command : helpKeys){
+		for (String command : helpKeys) {
 			string = string + command;
 		}
 		string = string + "---End of help transcript---";
-		return(string);
+		return (string);
 	}
 
 }

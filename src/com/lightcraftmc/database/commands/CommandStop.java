@@ -26,8 +26,8 @@ public class CommandStop extends Command {
 		}
 		LCDatabaseServer.getManager().shutdownServer();
 		System.exit(10);
-		return "SYSTEM SHUTTING DOWN: " + "isLocal: " + isLocal + " " + " Reason: " + args[0];
-
+		return "SYSTEM SHUTTING DOWN: " + "isLocal: " + isLocal + " "
+				+ " Reason: " + args[0];
 
 	}
 

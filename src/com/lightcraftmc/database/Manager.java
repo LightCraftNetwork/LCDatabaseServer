@@ -39,12 +39,12 @@ public class Manager {
 	public boolean isServerStarted() {
 		return serverStarted;
 	}
-	
-	public void shutdownServer(){
-		
+
+	public void shutdownServer() {
+
 	}
-	
-	public void startServer(){
+
+	public void startServer() {
 		handler = new ServerHandler();
 		handler.enable();
 	}

@@ -21,7 +21,8 @@ public class ServerHandler {
 
 	public boolean checkServer(String ip) {
 		try {
-			URL u = new URL("http://" + ip + ":" + LCDatabaseServer.getManager().getPort() + "/ping");
+			URL u = new URL("http://" + ip + ":"
+					+ LCDatabaseServer.getManager().getPort() + "/ping");
 			HttpURLConnection huc = (HttpURLConnection) u.openConnection();
 			huc.setRequestMethod("GET");
 			huc.connect();
@@ -65,29 +66,28 @@ public class ServerHandler {
 		try {
 			String i = getExternalIP();
 			if ((i != "") && (checkServer(i))) {
-				System.out.println(
-						"Got IP: "
-								+ InetAddress.getLocalHost().getHostAddress());
-				System.out.println
-						("Warning: It is recommended that you port forward the port defined as only users on your Local Network can access the database!");
+				System.out.println("Got IP: "
+						+ InetAddress.getLocalHost().getHostAddress());
+				System.out
+						.println("Warning: It is recommended that you port forward the port defined as only users on your Local Network can access the database!");
 				this.ip = InetAddress.getLocalHost().getHostAddress();
 				return;
 			}
 		} catch (UnknownHostException localUnknownHostException) {
 			try {
 				if (checkServer(InetAddress.getLocalHost().getHostAddress())) {
-					System.out.println(
-							"Got IP: "
-									+ InetAddress.getLocalHost()
-											.getHostAddress());
-					System.out.println("Warning: It is recommended that you port forward the port defined as only users on your Local Networkk can access the database!");
+					System.out.println("Got IP: "
+							+ InetAddress.getLocalHost().getHostAddress());
+					System.out
+							.println("Warning: It is recommended that you port forward the port defined as only users on your Local Networkk can access the database!");
 					this.ip = InetAddress.getLocalHost().getHostAddress();
 					return;
 				}
 			} catch (UnknownHostException localUnknownHostException1) {
 				if (checkServer("localhost")) {
 					System.out.println("Got IP: localhost");
-					System.out.println("Warning: It is recommended that you port forward the port defined as other users cannot access the database!");
+					System.out
+							.println("Warning: It is recommended that you port forward the port defined as other users cannot access the database!");
 					this.ip = "localhost";
 					return;
 				}
@@ -103,6 +103,5 @@ public class ServerHandler {
 		this.ws = ws;
 		return ws;
 	}
-
 
 }

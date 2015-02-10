@@ -10,17 +10,17 @@ import java.io.PrintWriter;
 public class UtilFile {
 
 	public static void save(String category, String key, String value) {
-		String path = "data\\" + category.toLowerCase()+ "\\" + key + ".txt";
+		String path = "data\\" + category.toLowerCase() + "\\" + key + ".txt";
 		File file = new File(path);
 		file.getParentFile().mkdirs();
-        if (!file.exists()){
-            try {
+		if (!file.exists()) {
+			try {
 				file.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        } 
+		}
 		try {
 			PrintWriter out = new PrintWriter(file.getAbsolutePath());
 			out.print(value.replace("\n", ">>NEWLN"));
@@ -38,7 +38,7 @@ public class UtilFile {
 		File file = new File(path);
 		String fileName = file.getAbsolutePath();
 		String line = "";
-		
+
 		try {
 			// FileReader reads text files in the default encoding.
 			FileReader fileReader = new FileReader(fileName);

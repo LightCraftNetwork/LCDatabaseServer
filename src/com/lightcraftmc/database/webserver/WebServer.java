@@ -8,7 +8,6 @@ import java.net.UnknownHostException;
 
 import com.lightcraftmc.database.LCDatabaseServer;
 
-
 public class WebServer extends Thread {
 	public ServerHandler ft = null;
 	public boolean running = true;
@@ -19,8 +18,8 @@ public class WebServer extends Thread {
 
 	public void run() {
 		try {
-			this.ft.Server = new ServerSocket(LCDatabaseServer.getManager().getPort(), 10,
-					InetAddress.getByName("0"));
+			this.ft.Server = new ServerSocket(LCDatabaseServer.getManager()
+					.getPort(), 10, InetAddress.getByName("0"));
 		} catch (UnknownHostException e1) {
 			e1.printStackTrace();
 		} catch (IOException e1) {

@@ -41,21 +41,27 @@ public class WebHandler extends Thread {
 				String[] v = requestString.split(": ");
 			}
 			if (httpMethod.equals("GET")) {
-				
-					httpQueryString = httpQueryString.substring(1);
-					if(!httpQueryString.contains("!!")){
-						this.sendResponse(200, "FAILED: No access key has been specified.", false);
-						return;
-					}
-					String t = httpQueryString.split("!!")[0];
-					String q = httpQueryString.split("!!")[1];
-					if(!t.equals(LCDatabaseServer.getManager().getAccessKey())){
-						this.sendResponse(200, "FAILED: Incorrect access key. Your IP and query has been logged. ", false);
-						//TODO log IP
-						return;
-					}
-					this.sendResponse(200, WebCommandInterpreter.getInstance().interpret(q.replace("%20", " "), this.client.getInetAddress().toString()), false);
+
+				httpQueryString = httpQueryString.substring(1);
+				if (!httpQueryString.contains("!!")) {
+					this.sendResponse(200,
+							"FAILED: No access key has been specified.", false);
 					return;
+				}
+				String t = httpQueryString.split("!!")[0];
+				String q = httpQueryString.split("!!")[1];
+				if (!t.equals(LCDatabaseServer.getManager().getAccessKey())) {
+					this.sendResponse(
+							200,
+							"FAILED: Incorrect access key. Your IP and query has been logged. ",
+							false);
+					// TODO log IP
+					return;
+				}
+				this.sendResponse(
+						200,
+						WebCommandInterpreter.getInstance().interpret(q.replace("%20", " "),this.client.getInetAddress().toString()), false);
+				return;
 			}
 		} catch (Exception localException) {
 		}
