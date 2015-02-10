@@ -17,6 +17,7 @@ public class CommandList extends Command {
 		if (args.length == 0) {
 			return "Usage: list filesystem (use '@a' for root data dir)";
 		}
+		try{
 		String look = "";
 		if(args[0].equalsIgnoreCase("@a")){
 			look = "./data/";
@@ -24,7 +25,7 @@ public class CommandList extends Command {
 			look = "./data/" + args[0];
 		}
 		File file = new File(look);
-		String files = "DIRECTORY LISTING OF " + look + "::\n";
+		String files = "SUCCESS: DIRECTORY LISTING OF " + look + "::\n";
 		int counter = 0;
 		for(File f : file.listFiles()){
 			counter++;
@@ -32,6 +33,10 @@ public class CommandList extends Command {
 		}
 		files = files + ":: (Total: " + counter + " file(s).) (Finished in " + (System.currentTimeMillis() - time) + " ms)";
 		return files;
+		}catch(Exception ex){
+			return "FAILED: Could not find directory.";
+			
+		}
 
 	}
 
