@@ -7,21 +7,24 @@ public class CommandInsert extends Command {
 
 	public CommandInsert() {
 		super("insert");
-		// TODO Auto-generated constructor stub
+		setDescription("Set a specific data value into the database!");
 	}
 
 	@Override
 	public String runCommand(boolean isLocal, String[] args) {
-		if(args.length == 0){
-			return("Usage: insert category key value (Please use _ in place of spaces.)");
+		if (args.length == 0) {
+			return ("Usage: insert category key value (Please use _ in place of spaces.)");
 		}
+		try{
 		String category = args[0].toLowerCase();
 		String key = args[1];
 		String value = args[2];
 		UtilFile.save(category, key, value);
-		return ("SUCCESS: Inserting " + value + " into " + category + " with key " + key);
+		return ("SUCCESS: Inserting " + value + " into " + category
+				+ " with key " + key);
+		}catch(Exception ex){
+			return "FAILED: An error occured, please try again. || Usage: insert category key value (Please use _ in place of spaces.)";
+		}
 	}
-	
-	
 
 }

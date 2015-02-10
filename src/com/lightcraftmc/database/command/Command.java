@@ -13,9 +13,9 @@ public abstract class Command {
 
 	public abstract String runCommand(boolean isLocal, String[] args);
 
-	public void throwError(String error) {
+	public String throwError(String error) {
 		System.out.println("[COMMAND ERROR] " + error);
-		return;
+		return "[COMMAND ERROR] " + error;
 	}
 
 	public String getName() {
@@ -41,7 +41,5 @@ public abstract class Command {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
 }

@@ -7,7 +7,7 @@ public class CommandStop extends Command {
 
 	public CommandStop() {
 		super("stop");
-		// TODO Auto-generated constructor stub
+		this.setDescription("Stop the server!");
 	}
 
 	@Override
