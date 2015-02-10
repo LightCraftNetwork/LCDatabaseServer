@@ -4,7 +4,7 @@ public abstract class Command {
 
 	private String name;
 	private String[] subNames;
-	private String sendBack = "";
+	private String description = "undefined";
 
 	public Command(String name) {
 		this.name = name;
@@ -34,14 +34,14 @@ public abstract class Command {
 		this.subNames = subNames;
 	}
 
-	public void sendBack(String s) {
-		sendBack = s;
+	public String getDescription() {
+		return description;
 	}
 
-	public String getSendBack() {
-		String sb = sendBack;
-		sendBack = "";
-		return sb;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+	
+	
 
 }
