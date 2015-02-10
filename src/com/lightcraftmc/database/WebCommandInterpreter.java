@@ -29,7 +29,9 @@ public class WebCommandInterpreter {
 				try {
 					return command.runCommand(false, args);
 				} catch (Exception ex) {
-					ex.printStackTrace();
+					//TODO log
+					return "FAILED: An internal error has occured while trying to parse that command.";
+					//ex.printStackTrace();
 				}
 			}
 		}
@@ -40,12 +42,14 @@ public class WebCommandInterpreter {
 						return command.runCommand(false, args);
 					}
 				} catch (Exception ex) {
-					ex.printStackTrace();
+					//TODO log
+					return "FAILED: An internal error has occured while trying to parse that command.";
+					//ex.printStackTrace();
 				}
 
 			}
 		}
-		return "[ERROR] Unknown command. Use \"help\" command to get a list of commands.";
+		return "FAILED: Unknown command. Use \"help\" command to get a list of commands.";
 	}
 
 	public String getArgs(String s) {
