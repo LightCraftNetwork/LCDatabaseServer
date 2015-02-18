@@ -12,7 +12,7 @@ public class CommandList extends Command {
 	}
 
 	@Override
-	public String runCommand(boolean isLocal, String[] args) {
+	public String runCommand(String ip, boolean isLocal, String[] args) {
 		long time = System.currentTimeMillis();
 		if (args.length == 0) {
 			return "Usage: list filesystem (use '@a' for root data dir)";

@@ -11,7 +11,7 @@ public class CommandReload extends Command {
 	}
 
 	@Override
-	public String runCommand(boolean isLocal, String[] args) {
+	public String runCommand(String ip, boolean isLocal, String[] args) {
 		long time = System.currentTimeMillis();
 		CommandManager.initCommands();
 		return "SUCCESS: Reload complete.";

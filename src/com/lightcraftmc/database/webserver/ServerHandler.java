@@ -16,7 +16,7 @@ public class ServerHandler {
 
 	ServerSocket Server = null;
 	private WebServer ws = null;
-	String ip = "";
+	public String ip = "";
 	public HashMap<String, Boolean> checks = new HashMap();
 
 	public boolean checkServer(String ip) {

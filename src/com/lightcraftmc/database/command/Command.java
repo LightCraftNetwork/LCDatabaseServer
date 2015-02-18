@@ -11,7 +11,7 @@ public abstract class Command {
 		this.subNames = new String[] {};
 	}
 
-	public abstract String runCommand(boolean isLocal, String[] args);
+	public abstract String runCommand(String ipAddress, boolean isLocal, String[] args);
 
 	public String throwError(String error) {
 		System.out.println("[COMMAND ERROR] " + error);

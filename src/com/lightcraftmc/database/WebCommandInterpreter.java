@@ -27,7 +27,7 @@ public class WebCommandInterpreter {
 		for (Command command : CommandManager.getInstance().commands) {
 			if (command.getName().equalsIgnoreCase(commandName)) {
 				try {
-					return command.runCommand(false, args);
+					return command.runCommand(ip, false, args);
 				} catch (Exception ex) {
 					//TODO log
 					return "FAILED: An internal error has occured while trying to parse that command.";
@@ -39,7 +39,7 @@ public class WebCommandInterpreter {
 			for (String subName : command.getSubNames()) {
 				try {
 					if (subName.equalsIgnoreCase(commandName)) {
-						return command.runCommand(false, args);
+						return command.runCommand(ip, false, args);
 					}
 				} catch (Exception ex) {
 					//TODO log

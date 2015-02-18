@@ -14,7 +14,7 @@ public class CommandHelp extends Command {
 	}
 
 	@Override
-	public String runCommand(boolean isLocal, String[] args) {
+	public String runCommand(String ip, boolean isLocal, String[] args) {
 		String string = "---Start of help transcript---\n";
 		ArrayList<String> helpKeys = new ArrayList<String>();
 		for (Command command : CommandManager.getInstance().commands) {
