@@ -61,7 +61,27 @@ public class UtilBootstrap {
         lines.add(Tag.open("label") + "Query" + Tag.close("label"));
         lines.add(Tag.tag("input type=\"text\" name=\"query\" class=\"span9\" placeholder=\"Server Query\""));
         lines.add(Tag.close("form"));
+        lines.addAll(createSmallButton("Sign out", "/formatted:[accessToken]!!login%20signout".replace("[accessToken]", accessToken), "warning"));
+        lines.addAll(createSmallButton("Stop Server", "/formatted:[accessToken]!!stop%20Button-click_by_user".replace("[accessToken]", accessToken), "danger"));
+        lines.addAll(createSmallButton("List Commands", "/formatted:[accessToken]!!help".replace("[accessToken]", accessToken), "info"));
+        lines.addAll(createSmallButton("Reload Server", "/formatted:[accessToken]!!reload".replace("[accessToken]", accessToken), "danger"));
         lines.add(Tag.close("div"));
+        return lines;
+    }
+
+    public static ArrayList<String> createSignOutButton(String link) {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("a href=\"" + link + "\" class=\"btn btn-success btn-lg\""));
+        lines.add("<span class=\"glyphicon glyphicon-remove\"></span> " + Tag.open("p") + "Logout" + Tag.close("p"));
+        lines.add(Tag.close("a"));
+        return lines;
+    }
+
+    public static ArrayList<String> createSmallButton(String title, String link, String btnType) {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("a href=\"" + link + "\" class=\"btn btn-success btn-" + btnType + "\""));
+        lines.add(title);
+        lines.add(Tag.close("a"));
         return lines;
     }
 }

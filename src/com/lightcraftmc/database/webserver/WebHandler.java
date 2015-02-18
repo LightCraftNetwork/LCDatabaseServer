@@ -46,7 +46,7 @@ public class WebHandler extends Thread {
                 httpQueryString = httpQueryString.replace("%2F", "/");
                 httpQueryString = httpQueryString.replace("%40", "@");
                 boolean isFormatted = false;
-                if(httpQueryString.startsWith("formatted:")){
+                if (httpQueryString.startsWith("formatted:")) {
                     isFormatted = true;
                     httpQueryString = httpQueryString.replaceFirst("formatted:", "");
                 }
@@ -63,7 +63,7 @@ public class WebHandler extends Thread {
                 }
 
                 String response = WebCommandInterpreter.getInstance().interpret(q.replace("%20", " "), this.client.getInetAddress().toString());
-                if(isFormatted){
+                if (isFormatted) {
                     response = WebGraphicsHandler.handleResponse(q.replace("%20", " "), response);
                 }
                 this.sendResponse(200, response, false);
