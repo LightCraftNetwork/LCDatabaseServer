@@ -1,7 +1,5 @@
-package com.lightcraftmc.database;
+package com.lightcraftmc.database.command;
 
-import com.lightcraftmc.database.command.Command;
-import com.lightcraftmc.database.command.CommandManager;
 
 public class WebCommandInterpreter {
 
@@ -14,7 +12,7 @@ public class WebCommandInterpreter {
         return instance;
     }
 
-    public String interpret(String s, String ip) {
+    public String interpret(String s, String ip, boolean isAdmin) {
         String commandName;
         String[] args;
         if (s.contains(" ")) {
@@ -27,7 +25,7 @@ public class WebCommandInterpreter {
         for (Command command : CommandManager.getInstance().commands) {
             if (command.getName().equalsIgnoreCase(commandName)) {
                 try {
-                    return command.runCommand(ip, false, args);
+                    return command.runCommand(ip, false, args, isAdmin);
                 } catch (Exception ex) {
                     // TODO log
                     return "FAILED: An internal error has occured while trying to parse that command.";
@@ -39,7 +37,7 @@ public class WebCommandInterpreter {
             for (String subName : command.getSubNames()) {
                 try {
                     if (subName.equalsIgnoreCase(commandName)) {
-                        return command.runCommand(ip, false, args);
+                        return command.runCommand(ip, false, args, isAdmin);
                     }
                 } catch (Exception ex) {
                     // TODO log

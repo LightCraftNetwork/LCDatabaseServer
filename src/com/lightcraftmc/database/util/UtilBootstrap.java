@@ -50,6 +50,20 @@ public class UtilBootstrap {
         return lines;
     }
 
+    /**
+     * Requires a body, and creates a container.
+     */
+    public static ArrayList<String> createError(String text) {
+        text = text.replace("\n", "<br>");
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"alert alert-danger\" role=\"alert\""));
+        lines.add(Tag.tag("span class=\"glyphicon glyphicon-exclamation-sign\" aria-hidden=\"true\"") + Tag.close("span"));
+        lines.add(Tag.tag("span class=\"sr-only\"") + "Error:" + Tag.close("span"));
+        lines.add(text);
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+
     public static ArrayList<String> actionForm(String accessToken) {
         ArrayList<String> lines = new ArrayList<String>();
         try {
@@ -65,6 +79,25 @@ public class UtilBootstrap {
         lines.addAll(createSmallButton("Stop Server", "/formatted:[accessToken]!!stop%20Button-click_by_user".replace("[accessToken]", accessToken), "danger"));
         lines.addAll(createSmallButton("List Commands", "/formatted:[accessToken]!!help".replace("[accessToken]", accessToken), "info"));
         lines.addAll(createSmallButton("Reload Server", "/formatted:[accessToken]!!reload".replace("[accessToken]", accessToken), "danger"));
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+
+    public static ArrayList<String> loginForm() {
+        ArrayList<String> lines = new ArrayList<String>();
+        
+        try {
+            lines.add(Tag.tag("div class=\"container\""));
+            lines.add(Tag.open("form action=\"/formatted:publicKey!!login%20\" class=\"well span9\" method=\"GET\""));
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        lines.add(Tag.open("label") + "Access Token" + Tag.close("label"));
+        lines.add(Tag.tag("input type=\"text\" name=\"query\" class=\"span9\" placeholder=\"Access Token\""));
+        lines.addAll(createSmallButton("?", "/formatted:publicKey!!login%20help", "info"));
+        lines.add(Tag.close("form"));
+        
         lines.add(Tag.close("div"));
         return lines;
     }

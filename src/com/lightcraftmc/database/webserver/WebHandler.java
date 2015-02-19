@@ -10,8 +10,9 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 
 import com.lightcraftmc.database.LCDatabaseServer;
-import com.lightcraftmc.database.WebCommandInterpreter;
 import com.lightcraftmc.database.WebGraphicsHandler;
+import com.lightcraftmc.database.command.WebCommandInterpreter;
+import com.lightcraftmc.login.LoginManager;
 
 public class WebHandler extends Thread {
     private Socket client;
@@ -39,12 +40,16 @@ public class WebHandler extends Thread {
                 String[] v = requestString.split(": ");
             }
             if (httpMethod.equals("GET")) {
-                System.out.println(httpQueryString);
+                if (httpQueryString.equalsIgnoreCase("/")) {
+                    httpQueryString = "/formatted:publicKey!!#login-page";
+                }
                 httpQueryString = httpQueryString.substring(1);
                 httpQueryString = httpQueryString.replace("?query=", "");
                 httpQueryString = httpQueryString.replace("+", " ");
                 httpQueryString = httpQueryString.replace("%2F", "/");
                 httpQueryString = httpQueryString.replace("%40", "@");
+                httpQueryString = httpQueryString.replace("%23", "#");
+
                 boolean isFormatted = false;
                 if (httpQueryString.startsWith("formatted:")) {
                     isFormatted = true;
@@ -56,15 +61,22 @@ public class WebHandler extends Thread {
                 }
                 String t = httpQueryString.split("!!")[0];
                 String q = httpQueryString.split("!!")[1];
+                if(isFormatted){
+                    if(t.equals("publicKey")){
+                        if(LoginManager.getInstance().isLoggedIn(this.client.getInetAddress().toString())){
+                            t = LCDatabaseServer.getManager().getAccessKey();
+                        }
+                    }
+                }
                 if (!(t.equals(LCDatabaseServer.getManager().getAccessKey()) || t.equals("publicKey"))) {
                     this.sendResponse(200, "FAILED: Incorrect access key. Your IP and query has been logged. ", false);
                     // TODO log IP
                     return;
                 }
 
-                String response = WebCommandInterpreter.getInstance().interpret(q.replace("%20", " "), this.client.getInetAddress().toString());
+                String response = WebCommandInterpreter.getInstance().interpret(q.replace("%20", " "), this.client.getInetAddress().toString(), !t.equals("publicKey"));
                 if (isFormatted) {
-                    response = WebGraphicsHandler.handleResponse(q.replace("%20", " "), response);
+                    response = WebGraphicsHandler.handleResponse(q.replace("%20", " "), response, this.client.getInetAddress().toString());
                 }
                 this.sendResponse(200, response, false);
                 return;

@@ -5,12 +5,21 @@ public abstract class Command {
     private String name;
     private String[] subNames;
     private String description = "undefined";
+    private boolean requiresLogin = true;
 
     public Command(String name) {
         this.name = name;
         this.subNames = new String[] {};
     }
-
+    /**
+     * For use inside of 
+     */
+    String runCommand(String ipAddress, boolean isLocal, String[] args, boolean isAdmin){
+        if(isRequiresLogin() && !isAdmin){
+            return "FAILED: You must be logged in to use that command!";
+        }
+        return runCommand(ipAddress, isLocal, args);
+    }
     public abstract String runCommand(String ipAddress, boolean isLocal, String[] args);
 
     public String throwError(String error) {
@@ -40,6 +49,14 @@ public abstract class Command {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isRequiresLogin() {
+        return requiresLogin;
+    }
+
+    public void setRequiresLogin(boolean requiresLogin) {
+        this.requiresLogin = requiresLogin;
     }
 
 }
