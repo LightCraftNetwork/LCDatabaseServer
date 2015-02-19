@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 public class UtilFile {
 
     public static void save(String category, String key, String value) {
-        String path = "data\\" + category.toLowerCase() + "\\" + key + ".txt";
+        String path = "data\\" + category.toLowerCase() + "\\" + key + ".lcdb-text";
         File file = new File(path);
         file.getParentFile().mkdirs();
         if (!file.exists()) {
@@ -34,7 +34,7 @@ public class UtilFile {
     }
 
     public static String load(String category, String key) {
-        String path = "data\\" + category.toLowerCase() + "\\" + key + ".txt";
+        String path = "data\\" + category.toLowerCase() + "\\" + key + ".lcdb-text";
         File file = new File(path);
         String fileName = file.getAbsolutePath();
         String line = "";
