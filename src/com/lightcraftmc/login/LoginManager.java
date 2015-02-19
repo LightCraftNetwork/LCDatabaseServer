@@ -6,7 +6,7 @@ public class LoginManager {
 
     private final HashMap<String, Long> logins = new HashMap<String, Long>();
     private static LoginManager instance;
-    public static long totalLoginTime = (6000);
+    public static long totalLoginTime = (10*60*1000);
 
     private LoginManager() {
     }
