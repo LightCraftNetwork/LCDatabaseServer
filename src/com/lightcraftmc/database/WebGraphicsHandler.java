@@ -27,22 +27,19 @@ public class WebGraphicsHandler {
         // TODO format
         lines.addAll(UtilBootstrap.container("Results", "Query: " + query, response));
         lines.addAll(UtilBootstrap.actionForm("publicKey"));
-        lines.add("<br> <br>");
-        ArrayList<RawCategory> categories = UtilGenerateCategories.getCategories();
-        ArrayList<String> lines2 = new ArrayList<String>();
-        boolean b = true;
-        for (RawCategory c : categories) {
-            lines2.addAll(UtilBootstrap.generateTable(c));
-            b = !b;
-        }
-        String builder2 = "";
-        for(String s : lines2){
-            builder2 = builder2 + s + "\n";
-        }
-       // lines.addAll(UtilBootstrap.container(builder2));
-        lines.addAll(UtilBootstrap.containerOpen());
-        lines.add(builder2);
-        lines.addAll(UtilBootstrap.containerClose());
+        // Beta testing of more page information
+        /*
+         * lines.add("<br> <br>"); ArrayList<RawCategory> categories =
+         * UtilGenerateCategories.getCategories(); ArrayList<String> lines2 =
+         * new ArrayList<String>(); boolean b = true; for (RawCategory c :
+         * categories) { lines2.addAll(UtilBootstrap.generateTable(c)); b = !b;
+         * } String builder2 = ""; int i = 0; for (String s : lines2) {
+         * System.out.println(i + "" + s); builder2 = builder2 + s + "\n"; i++;
+         * } // lines.addAll(UtilBootstrap.container(builder2));
+         * 
+         * //lines.addAll(UtilBootstrap.containerOpen()); lines.add(builder2);
+         * //lines.addAll(UtilBootstrap.containerClose());
+         */
         lines.add(Tag.close("body"));
         lines.add(Tag.close("html"));
         String builder = "";

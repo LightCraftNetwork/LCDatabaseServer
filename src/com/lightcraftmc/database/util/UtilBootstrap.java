@@ -52,7 +52,7 @@ public class UtilBootstrap {
        // lines.add("<p>This category has " + c.getItems().size() + " items.</p>");
        // lines.add(Tag.close("div"));
         lines.add(Tag.tag("table class=\"table\""));
-        lines.add("Thud<tr><th>Key</th></tr></thead>");
+        lines.add("<tr><th>Key</th></tr></thead>");
         lines.add("<tbody>");
         for(File f : c.getItems()){
             lines.add(Tag.open("tr"));
