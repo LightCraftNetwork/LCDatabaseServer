@@ -25,6 +25,7 @@ public class WebServer extends Thread {
             e1.printStackTrace();
         }
         while (this.running) {
+            @SuppressWarnings("unused")
             Socket connected = null;
             try {
                 new WebHandler(this.ft.Server.accept(), this).start();

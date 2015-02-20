@@ -18,6 +18,7 @@ public class WebHandler extends Thread {
     private Socket client;
     private BufferedReader inFromClient = null;
     private DataOutputStream outToClient = null;
+    @SuppressWarnings("unused")
     private WebServer ws = null;
     public static ArrayList<UUID> requested = new ArrayList<UUID>();
 
@@ -26,6 +27,7 @@ public class WebHandler extends Thread {
         this.ws = w;
     }
 
+    @SuppressWarnings("unused")
     public void run() {
         try {
             this.inFromClient = new BufferedReader(new InputStreamReader(this.client.getInputStream()));
@@ -50,7 +52,7 @@ public class WebHandler extends Thread {
                 httpQueryString = httpQueryString.replace("%40", "@");
                 httpQueryString = httpQueryString.replace("%23", "#");
 
-                boolean isFormatted = false;
+                boolean isFormatted = false;    
                 if (httpQueryString.startsWith("formatted:")) {
                     isFormatted = true;
                     httpQueryString = httpQueryString.replaceFirst("formatted:", "");

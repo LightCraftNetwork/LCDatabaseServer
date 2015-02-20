@@ -8,7 +8,6 @@ import com.lightcraftmc.database.commands.CommandList;
 import com.lightcraftmc.database.commands.CommandLogin;
 import com.lightcraftmc.database.commands.CommandReload;
 import com.lightcraftmc.database.commands.CommandRetrieve;
-import com.lightcraftmc.database.commands.CommandRetrieveFile;
 import com.lightcraftmc.database.commands.CommandStop;
 
 public class CommandManager {

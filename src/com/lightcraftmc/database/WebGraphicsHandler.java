@@ -2,10 +2,8 @@ package com.lightcraftmc.database;
 
 import java.util.ArrayList;
 
-import com.lightcraftmc.database.util.RawCategory;
 import com.lightcraftmc.database.util.Tag;
 import com.lightcraftmc.database.util.UtilBootstrap;
-import com.lightcraftmc.database.util.UtilGenerateCategories;
 import com.lightcraftmc.database.util.UtilLoginPage;
 import com.lightcraftmc.login.LoginManager;
 
@@ -15,7 +13,7 @@ public class WebGraphicsHandler {
         if (query.equalsIgnoreCase("#login-page")) {
             return handleLoginPage();
         }
-        boolean didSucceed = !response.startsWith("FAILED: ");
+       // boolean didSucceed = !response.startsWith("FAILED: ");
         response = response.replaceFirst("FAILED: ", "");
         response = response.replaceFirst("SUCCESS: ", "");
         ArrayList<String> lines = new ArrayList<String>();
