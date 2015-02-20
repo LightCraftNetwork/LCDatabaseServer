@@ -1,8 +1,7 @@
 package com.lightcraftmc.database.util;
 
+import java.io.File;
 import java.util.ArrayList;
-
-import com.lightcraftmc.database.LCDatabaseServer;
 
 public class UtilBootstrap {
 
@@ -32,6 +31,41 @@ public class UtilBootstrap {
         return lines;
     }
 
+    public static ArrayList<String> generateBoxes(boolean dark, String title, String text) {
+        title = title.replace("\n", "<br>");
+        text = text.replace("\n", "<br>");
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"panel panel-primary\""));
+        lines.add(Tag.tag("div class=\"panel-body\""));
+        lines.add(title);
+        lines.add(Tag.close("div"));
+        lines.add(Tag.tag("div class=\"panel-footer\"") + text + Tag.close("div"));
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+    
+    public static ArrayList<String> generateTable(RawCategory c){
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"panel panel-default\""));
+        lines.add("<div class=\"panel-heading\">" + c.getName() + "</div>");
+       // lines.add("<div class=\"panel-body\">");
+       // lines.add("<p>This category has " + c.getItems().size() + " items.</p>");
+       // lines.add(Tag.close("div"));
+        lines.add(Tag.tag("table class=\"table\""));
+        lines.add("Thud<tr><th>Key</th></tr></thead>");
+        lines.add("<tbody>");
+        for(File f : c.getItems()){
+            lines.add(Tag.open("tr"));
+          //  lines.add("<th scope=\"row\">1</th>");
+            lines.add(Tag.open("td") + f.getName() + Tag.close("td"));
+            lines.add(Tag.close("tr"));
+        }
+        lines.add(Tag.close("tbody"));
+        lines.add(Tag.close("table"));
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+
     /**
      * Requires a body, and creates a container.
      */
@@ -43,6 +77,34 @@ public class UtilBootstrap {
         lines.add(Tag.tag("div class=\"container\""));
         lines.add(Tag.open("h1") + title + Tag.close("h1"));
         lines.add(Tag.open("p") + subtitle + Tag.close("p"));
+        lines.add(Tag.open("pre"));
+        lines.add(text);
+        lines.add(Tag.close("pre"));
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+    
+    public static ArrayList<String> containerOpen() {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"container\""));
+        lines.add(Tag.open("pre"));
+        return lines;
+    }
+    
+    public static ArrayList<String> containerClose() {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.close("pre"));
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+
+    /**
+     * Requires a body, and creates a container.
+     */
+    public static ArrayList<String> container(String text) {
+        text = text.replace("\n", "<br>");
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"container\""));
         lines.add(Tag.open("pre"));
         lines.add(text);
         lines.add(Tag.close("pre"));
@@ -85,11 +147,11 @@ public class UtilBootstrap {
 
     public static ArrayList<String> loginForm() {
         ArrayList<String> lines = new ArrayList<String>();
-        
+
         try {
             lines.add(Tag.tag("div class=\"container\""));
             lines.add(Tag.open("form action=\"/formatted:publicKey!!login%20\" class=\"well span9\" method=\"GET\""));
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -97,7 +159,7 @@ public class UtilBootstrap {
         lines.add(Tag.tag("input type=\"text\" name=\"query\" class=\"span9\" placeholder=\"Access Token\""));
         lines.addAll(createSmallButton("?", "/formatted:publicKey!!login%20help", "info"));
         lines.add(Tag.close("form"));
-        
+
         lines.add(Tag.close("div"));
         return lines;
     }

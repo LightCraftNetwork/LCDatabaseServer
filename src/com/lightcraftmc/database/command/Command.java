@@ -14,13 +14,13 @@ public abstract class Command {
     /**
      * For use inside of 
      */
-    String runCommand(String ipAddress, boolean isLocal, String[] args, boolean isAdmin){
+    String prepareCommandForRun(String ipAddress, boolean isLocal, String[] args, boolean isAdmin){
         if(isRequiresLogin() && !isAdmin){
             return "FAILED: You must be logged in to use that command!";
         }
-        return runCommand(ipAddress, isLocal, args);
+        return runCommand(ipAddress, isLocal, args, isAdmin);
     }
-    public abstract String runCommand(String ipAddress, boolean isLocal, String[] args);
+    public abstract String runCommand(String ipAddress, boolean isLocal, String[] args, boolean isAdmin);
 
     public String throwError(String error) {
         System.out.println("[COMMAND ERROR] " + error);

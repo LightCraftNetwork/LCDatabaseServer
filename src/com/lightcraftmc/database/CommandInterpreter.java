@@ -36,7 +36,7 @@ public class CommandInterpreter {
         for (Command command : CommandManager.getInstance().commands) {
             if (command.getName().equalsIgnoreCase(commandName)) {
                 try {
-                    System.out.println(command.runCommand("127.0.0.1", true, args));
+                    System.out.println(command.runCommand("127.0.0.1", true, args, true));
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -47,7 +47,7 @@ public class CommandInterpreter {
             for (String subName : command.getSubNames()) {
                 try {
                     if (subName.equalsIgnoreCase(commandName)) {
-                        System.out.println(command.runCommand("127.0.0.1", true, args));
+                        System.out.println(command.runCommand("127.0.0.1", true, args, true));
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();

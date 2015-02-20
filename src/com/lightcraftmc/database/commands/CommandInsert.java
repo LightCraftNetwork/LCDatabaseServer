@@ -11,7 +11,7 @@ public class CommandInsert extends Command {
     }
 
     @Override
-    public String runCommand(String ip, boolean isLocal, String[] args) {
+    public String runCommand(String ip, boolean isLocal, String[] args, boolean isAdmin) {
         if (args.length == 0) {
             return ("Usage: insert category key value (Please use _ in place of spaces.)");
         }

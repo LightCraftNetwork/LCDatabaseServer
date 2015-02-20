@@ -8,11 +8,12 @@ public class CommandLogin extends Command {
 
     public CommandLogin() {
         super("login");
+        this.setDescription("Log into a user account.");
         setRequiresLogin(false);
     }
 
     @Override
-    public String runCommand(String ip, boolean isLocal, String[] args) {
+    public String runCommand(String ip, boolean isLocal, String[] args, boolean isAdmin) {
         if (isLocal) {
             return "FAILED: Sign-ins are not needed locally.";
         }

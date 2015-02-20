@@ -1,6 +1,5 @@
 package com.lightcraftmc.database.command;
 
-
 public class WebCommandInterpreter {
 
     private static WebCommandInterpreter instance;
@@ -25,11 +24,12 @@ public class WebCommandInterpreter {
         for (Command command : CommandManager.getInstance().commands) {
             if (command.getName().equalsIgnoreCase(commandName)) {
                 try {
-                    return command.runCommand(ip, false, args, isAdmin);
+                    return command.prepareCommandForRun(ip, false, args, isAdmin);
                 } catch (Exception ex) {
                     // TODO log
+                    ex.printStackTrace();
                     return "FAILED: An internal error has occured while trying to parse that command.";
-                    // ex.printStackTrace();
+
                 }
             }
         }
@@ -37,12 +37,13 @@ public class WebCommandInterpreter {
             for (String subName : command.getSubNames()) {
                 try {
                     if (subName.equalsIgnoreCase(commandName)) {
-                        return command.runCommand(ip, false, args, isAdmin);
+                        return command.prepareCommandForRun(ip, false, args, isAdmin);
                     }
                 } catch (Exception ex) {
                     // TODO log
+                    ex.printStackTrace();
                     return "FAILED: An internal error has occured while trying to parse that command.";
-                    // ex.printStackTrace();
+
                 }
 
             }

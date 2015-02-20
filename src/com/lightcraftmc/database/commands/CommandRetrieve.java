@@ -11,7 +11,7 @@ public class CommandRetrieve extends Command {
     }
 
     @Override
-    public String runCommand(String ip, boolean isLocal, String[] args) {
+    public String runCommand(String ip, boolean isLocal, String[] args, boolean isAdmin) {
         long time = System.currentTimeMillis();
         if (args.length == 0) {
             return "Usage: retrieve category key (Please use _ in place of spaces.)";

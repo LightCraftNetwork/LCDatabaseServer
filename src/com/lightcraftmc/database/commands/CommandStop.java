@@ -11,7 +11,7 @@ public class CommandStop extends Command {
     }
 
     @Override
-    public String runCommand(String ip, boolean isLocal, String[] args) {
+    public String runCommand(String ip, boolean isLocal, String[] args, boolean isAdmin) {
         if (args.length == 0) {
             return "You must specify a reason!";
         }
