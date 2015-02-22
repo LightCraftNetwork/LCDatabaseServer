@@ -42,9 +42,14 @@ public class WebHandler extends Thread {
                 String[] v = requestString.split(": ");
             }
             if (httpMethod.equals("GET")) {
+                System.out.println(httpQueryString);
+                if(httpQueryString.startsWith("/?")){
+                    httpQueryString = httpQueryString.replaceFirst("/?", "/formatted:publicKey!!#");
+                }
                 if (httpQueryString.equalsIgnoreCase("/")) {
                     httpQueryString = "/formatted:publicKey!!#login-page";
                 }
+                System.out.println(httpQueryString);
                 httpQueryString = httpQueryString.substring(1);
                 httpQueryString = httpQueryString.replace("?query=", "");
                 httpQueryString = httpQueryString.replace("+", " ");

@@ -31,6 +31,62 @@ public class UtilBootstrap {
         return lines;
     }
 
+    public static ArrayList<String> generateDropdown(String title, ButtonType type, ArrayList<Link> links) {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"btn-group\""));
+        lines.add(Tag.tag("button type=\"button\" class=\"btn btn-" + type.toString().toLowerCase() + " dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\""));
+        lines.add(title + "<span class=\"caret\"></span>");
+        lines.add(Tag.close("button"));
+        lines.add(Tag.tag("ul class=\"dropdown-menu\" role=\"menu\""));
+        for (Link l : links) {
+            if (l.isSeperator()) {
+                lines.add("<li role=\"presentation\" class=\"divider\"></li>");
+            } else {
+                lines.add("<li><a href=\"" + l.getLink() + "\">" + l.getTitle() + "</a> </li>");
+            }
+
+        }
+        lines.add(Tag.close("ul"));
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+
+    public static ArrayList<String> generateTabs(String active, ArrayList<Link> tabs, String linkPrefix) {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add("<ul class=\"nav nav-tabs\">");
+        for (Link l : tabs) {
+            if (active.equals(l.getTitle())) {
+                lines.add("<li role=\"presentation\" class=\"active\"><a href=\"" + linkPrefix + l.getLink() + "\">" + l.getTitle() + "</a></li>");
+            } else {
+                lines.add("<li role=\"presentation\"><a href=\"" + linkPrefix + l.getLink() + "\">" + l.getTitle() + "</a></li>");
+            }
+        }
+        lines.add("</li>");
+        return lines;
+    }
+    
+    public static ArrayList<String> generateTabs(String active) {
+        return generateTabs(active, UtilLink.getPages(), "");
+    }
+
+    /**
+     * Does NOT generate a body!
+     */
+    public static ArrayList<String> generateTitleWithoutHeadClose(String pageTitle) {
+        pageTitle = pageTitle.replace("\n", "<br>");
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(DOCTYPE_HTML);
+        lines.add(Tag.tag("html lang=\"" + lang + "\""));
+        lines.add(Tag.open("head"));
+        lines.add(Tag.open("title") + pageTitle + Tag.close("title"));
+        lines.add(Tag.tag("meta charset=\"utf-8\""));
+        lines.add(Tag.tag("meta name=\"viewport\" content=\"width=device-width, initial-scale=1\""));
+        lines.add(Tag.tag("link rel=\"stylesheet\" href=\"" + BOOTSTRAP_URL_CSS + "\""));
+        lines.add(Tag.tag("script src=\"" + JQUERY_URL_JS + "\"") + Tag.close("script"));
+        lines.add(Tag.tag("script src=\"" + BOOTSTRAP_URL_JS + "\"") + Tag.close("script"));
+        return lines;
+    }
+
     public static ArrayList<String> generateBoxes(boolean dark, String title, String text) {
         title = title.replace("\n", "<br>");
         text = text.replace("\n", "<br>");
@@ -43,20 +99,52 @@ public class UtilBootstrap {
         lines.add(Tag.close("div"));
         return lines;
     }
-    
-    public static ArrayList<String> generateTable(RawCategory c){
+
+    public static ArrayList<String> generateListing(String title, ArrayList<String> categories, String linkPrefix) {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"list-group\""));
+        lines.add(Tag.tag("a href=\"#\" class=\"list-group-item active\""));
+        lines.add(title);
+        lines.add(Tag.close("a"));
+        boolean blue = false;
+        for (String categoryTitle : categories) {
+            if (!blue) {
+                lines.add("<a href = \"" + linkPrefix + categoryTitle + "\" class=\"list-group-item\">" + categoryTitle + "</a>");
+            } else {
+                lines.add("<a href = \"" + linkPrefix + categoryTitle + "\" class=\"list-group-item list-group-item-info\">" + categoryTitle + "</a>");
+            }
+            blue = !blue;
+        }
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+
+    public static ArrayList<String> generateCategoryListing(String title, ArrayList<RawCategory> categories, String linkPrefix) {
+        ArrayList<String> converted = new ArrayList<String>();
+        for (RawCategory category : categories) {
+            try {
+                converted.add(category.getName().replace("\\", "/"));
+            } catch (Exception ex) {
+            }
+        }
+
+        return generateListing(title, converted, linkPrefix);
+    }
+
+    public static ArrayList<String> generateTable(RawCategory c) {
         ArrayList<String> lines = new ArrayList<String>();
         lines.add(Tag.tag("div class=\"panel panel-default\""));
         lines.add("<div class=\"panel-heading\">" + c.getName() + "</div>");
-       // lines.add("<div class=\"panel-body\">");
-       // lines.add("<p>This category has " + c.getItems().size() + " items.</p>");
-       // lines.add(Tag.close("div"));
+        // lines.add("<div class=\"panel-body\">");
+        // lines.add("<p>This category has " + c.getItems().size() +
+        // " items.</p>");
+        // lines.add(Tag.close("div"));
         lines.add(Tag.tag("table class=\"table\""));
         lines.add("<tr><th>Key</th></tr></thead>");
         lines.add("<tbody>");
-        for(File f : c.getItems()){
+        for (File f : c.getItems()) {
             lines.add(Tag.open("tr"));
-          //  lines.add("<th scope=\"row\">1</th>");
+            // lines.add("<th scope=\"row\">1</th>");
             lines.add(Tag.open("td") + f.getName() + Tag.close("td"));
             lines.add(Tag.close("tr"));
         }
@@ -83,17 +171,17 @@ public class UtilBootstrap {
         lines.add(Tag.close("div"));
         return lines;
     }
-    
+
     public static ArrayList<String> containerOpen() {
         ArrayList<String> lines = new ArrayList<String>();
         lines.add(Tag.tag("div class=\"container\""));
-        lines.add(Tag.open("pre"));
+        // lines.add(Tag.open("pre"));
         return lines;
     }
-    
+
     public static ArrayList<String> containerClose() {
         ArrayList<String> lines = new ArrayList<String>();
-        lines.add(Tag.close("pre"));
+        // lines.add(Tag.close("pre"));
         lines.add(Tag.close("div"));
         return lines;
     }
@@ -179,4 +267,5 @@ public class UtilBootstrap {
         lines.add(Tag.close("a"));
         return lines;
     }
+
 }

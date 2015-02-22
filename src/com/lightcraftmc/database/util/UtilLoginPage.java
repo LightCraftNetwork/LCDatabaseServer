@@ -18,6 +18,7 @@ public class UtilLoginPage {
         loginPage.addAll(UtilBootstrap.createError("You must sign in to access this page."));
         loginPage.addAll(UtilBootstrap.container("Sign in", "Sign in to your account", "You must enter an access token given by your administrator.\nYou can also use 'publicKey' (without quotes) to access public commands."));
         loginPage.addAll(UtilBootstrap.loginForm());
+        
         loginPage.add(Tag.close("body"));
         loginPage.add(Tag.close("html"));
 
