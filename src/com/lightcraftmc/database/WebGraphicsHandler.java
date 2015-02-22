@@ -11,7 +11,6 @@ import com.lightcraftmc.login.LoginManager;
 public class WebGraphicsHandler {
 
     public static String handleResponse(String query, String response, String address) {
-        System.out.println(query);
         if (query.equalsIgnoreCase("#login-page")) {
             return handleLoginPage();
         }

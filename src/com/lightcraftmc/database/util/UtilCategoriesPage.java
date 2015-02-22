@@ -13,7 +13,6 @@ public class UtilCategoriesPage {
         boolean categoriesPage = false;
         if (args.length > 2) {
             String command = args[2];
-            System.out.println(command);
             if (command.equalsIgnoreCase("delete")) {
                 try {
                     RawCategory r = getCategory(args[1]);
