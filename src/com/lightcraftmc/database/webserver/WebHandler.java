@@ -5,9 +5,7 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.UUID;
 
 import com.lightcraftmc.database.LCDatabaseServer;
 import com.lightcraftmc.database.WebGraphicsHandler;
