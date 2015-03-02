@@ -6,20 +6,28 @@ public abstract class Command {
     private String[] subNames;
     private String description = "undefined";
     private boolean requiresLogin = true;
+    private static Command instance;
 
     public Command(String name) {
         this.name = name;
         this.subNames = new String[] {};
+        instance = this;
     }
+
+    public static Command getInstance() {
+        return instance;
+    }
+
     /**
-     * For use inside of 
+     * For use inside of
      */
-    String prepareCommandForRun(String ipAddress, boolean isLocal, String[] args, boolean isAdmin){
-        if(isRequiresLogin() && !isAdmin){
+    String prepareCommandForRun(String ipAddress, boolean isLocal, String[] args, boolean isAdmin) {
+        if (isRequiresLogin() && !isAdmin) {
             return "FAILED: You must be logged in to use that command!";
         }
         return runCommand(ipAddress, isLocal, args, isAdmin);
     }
+
     public abstract String runCommand(String ipAddress, boolean isLocal, String[] args, boolean isAdmin);
 
     public String throwError(String error) {

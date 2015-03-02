@@ -12,6 +12,7 @@ import java.util.UUID;
 import com.lightcraftmc.database.LCDatabaseServer;
 import com.lightcraftmc.database.WebGraphicsHandler;
 import com.lightcraftmc.database.command.WebCommandInterpreter;
+import com.lightcraftmc.database.logger.LoggedQuery;
 import com.lightcraftmc.login.LoginManager;
 
 public class WebHandler extends Thread {
@@ -20,7 +21,6 @@ public class WebHandler extends Thread {
     private DataOutputStream outToClient = null;
     @SuppressWarnings("unused")
     private WebServer ws = null;
-    public static ArrayList<UUID> requested = new ArrayList<UUID>();
 
     public WebHandler(Socket c, WebServer w) {
         this.client = c;
@@ -41,8 +41,11 @@ public class WebHandler extends Thread {
                 requestString = this.inFromClient.readLine();
                 String[] v = requestString.split(": ");
             }
+
+            LoggedQuery query = new LoggedQuery(client.getInetAddress(), httpQueryString, httpMethod);
+
             if (httpMethod.equals("GET")) {
-                if(httpQueryString.startsWith("/?")){
+                if (httpQueryString.startsWith("/?")) {
                     httpQueryString = httpQueryString.replaceFirst("/?", "/formatted:publicKey!!#");
                 }
                 if (httpQueryString.equalsIgnoreCase("/")) {
@@ -55,7 +58,7 @@ public class WebHandler extends Thread {
                 httpQueryString = httpQueryString.replace("%40", "@");
                 httpQueryString = httpQueryString.replace("%23", "#");
 
-                boolean isFormatted = false;    
+                boolean isFormatted = false;
                 if (httpQueryString.startsWith("formatted:")) {
                     isFormatted = true;
                     httpQueryString = httpQueryString.replaceFirst("formatted:", "");
@@ -66,15 +69,15 @@ public class WebHandler extends Thread {
                 }
                 String t = httpQueryString.split("!!")[0];
                 String q = httpQueryString.split("!!")[1];
-                if(isFormatted){
-                    if(t.equals("publicKey")){
-                        if(LoginManager.getInstance().isLoggedIn(this.client.getInetAddress().toString())){
+                if (isFormatted) {
+                    if (t.equals("publicKey")) {
+                        if (LoginManager.getInstance().isLoggedIn(this.client.getInetAddress().toString())) {
                             t = LCDatabaseServer.getManager().getAccessKey();
                         }
                     }
                 }
                 if (!(t.equals(LCDatabaseServer.getManager().getAccessKey()) || t.equals("publicKey"))) {
-                    this.sendResponse(200, "FAILED: Incorrect access key. Your IP and query has been logged. ", false);
+                    query = this.sendResponse(200, "FAILED: Incorrect access key. Your IP and query has been logged. ", false, query);
                     // TODO log IP
                     return;
                 }
@@ -83,11 +86,19 @@ public class WebHandler extends Thread {
                 if (isFormatted) {
                     response = WebGraphicsHandler.handleResponse(q.replace("%20", " "), response, this.client.getInetAddress().toString());
                 }
-                this.sendResponse(200, response, false);
+                query = this.sendResponse(200, response, false, query);
                 return;
             }
         } catch (Exception localException) {
         }
+    }
+
+    public LoggedQuery sendResponse(int statusCode, String responseString, boolean isFile, LoggedQuery query) throws Exception {
+        sendResponse(statusCode, responseString, isFile);
+        query.setResponseCode(statusCode);
+        query.setResponse(responseString);
+        query.setFile(isFile);
+        return query;
     }
 
     public void sendResponse(int statusCode, String responseString, boolean isFile) throws Exception {

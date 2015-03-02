@@ -11,6 +11,7 @@ import com.lightcraftmc.login.LoginManager;
 public class WebGraphicsHandler {
 
     public static String handleResponse(String query, String response, String address) {
+        query = query.replace("#?createcategory=", "#?categories!");
         if (query.equalsIgnoreCase("#login-page")) {
             return handleLoginPage();
         }
@@ -18,7 +19,7 @@ public class WebGraphicsHandler {
             if (!LoginManager.getInstance().isLoggedIn(address)) {
                 return handleLoginPage();
             }
-            return handleCategoriesPage(query.split("-"));
+            return handleCategoriesPage(query.split("-"), address);
         }
         // boolean didSucceed = !response.startsWith("FAILED: ");
         response = response.replaceFirst("FAILED: ", "");
@@ -53,9 +54,9 @@ public class WebGraphicsHandler {
         return builder;
     }
 
-    public static String handleCategoriesPage(String[] args) {
+    public static String handleCategoriesPage(String[] args, String ip) {
         String builder = "";
-        for (String line : UtilCategoriesPage.getCategoriesPage(args)) {
+        for (String line : UtilCategoriesPage.getCategoriesPage(args, ip)) {
             builder = builder + line + "\n";
         }
         return builder;

@@ -64,7 +64,7 @@ public class UtilBootstrap {
         lines.add("</li>");
         return lines;
     }
-    
+
     public static ArrayList<String> generateTabs(String active) {
         return generateTabs(active, UtilLink.getPages(), "");
     }
@@ -140,13 +140,40 @@ public class UtilBootstrap {
         // " items.</p>");
         // lines.add(Tag.close("div"));
         lines.add(Tag.tag("table class=\"table\""));
-        lines.add("<tr><th>Key</th></tr></thead>");
+        lines.add("<tr><th><b><u>Key</u></b></th></tr></thead>");
         lines.add("<tbody>");
         for (File f : c.getItems()) {
-            lines.add(Tag.open("tr"));
-            // lines.add("<th scope=\"row\">1</th>");
-            lines.add(Tag.open("td") + f.getName() + Tag.close("td"));
-            lines.add(Tag.close("tr"));
+            if (!f.isDirectory()) {
+                lines.add(Tag.open("tr"));
+                // lines.add("<th scope=\"row\">1</th>");
+                lines.add(Tag.open("td") + "<a href=\"/formatted:publicKey!!?query=retrieve%20" + c.getName() + "%20" + f.getName().replace(".lcdb-text", "") + "\">" + f.getName() + "</a>" + Tag.close("td"));
+                lines.add(Tag.close("tr"));
+            }
+        }
+        lines.add(Tag.close("tbody"));
+        lines.add(Tag.close("table"));
+        lines.add(Tag.close("div"));
+        return lines;
+    }
+
+    public static ArrayList<String> generateSubcategoriesTable(RawCategory c) {
+        ArrayList<String> lines = new ArrayList<String>();
+        lines.add(Tag.tag("div class=\"panel panel-default\""));
+        lines.add("<div class=\"panel-heading\">" + "Subcategories of " + c.getName() + "</div>");
+        // lines.add("<div class=\"panel-body\">");
+        // lines.add("<p>This category has " + c.getItems().size() +
+        // " items.</p>");
+        // lines.add(Tag.close("div"));
+        lines.add(Tag.tag("table class=\"table\""));
+        lines.add("<tr><th>" + "<b><u>Name</u></b>" + "</th></tr></thead>");
+        lines.add("<tbody>");
+        for (File f : c.getItems()) {
+            if (f.isDirectory()) {
+                lines.add(Tag.open("tr"));
+                // lines.add("<th scope=\"row\">1</th>");
+                lines.add(Tag.open("td") + "<a href=\"/?categories-" + c.getName() + "/" + f.getName() + "\"</a>" + c.getName() + "/" + f.getName() + Tag.close("td"));
+                lines.add(Tag.close("tr"));
+            }
         }
         lines.add(Tag.close("tbody"));
         lines.add(Tag.close("table"));
