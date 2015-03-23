@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.net.URLDecoder;
 import java.util.StringTokenizer;
 
 import com.lightcraftmc.database.LCDatabaseServer;
@@ -52,14 +53,7 @@ public class WebHandler extends Thread {
                 httpQueryString = httpQueryString.substring(1);
                 httpQueryString = httpQueryString.replace("?query=", "");
                 httpQueryString = httpQueryString.replace("+", " ");
-                httpQueryString = httpQueryString.replace("%2F", "/");
-                httpQueryString = httpQueryString.replace("%40", "@");
-                httpQueryString = httpQueryString.replace("%23", "#");
-                httpQueryString = httpQueryString.replace("%24", "$");
-                httpQueryString = httpQueryString.replace("%3A", ":");
-                httpQueryString = httpQueryString.replace("%3F", "?");
-                httpQueryString = httpQueryString.replace("%3F", "?");
-                httpQueryString = httpQueryString.replace("%3D", "=");
+                httpQueryString = URLDecoder.decode(httpQueryString,"UTF-8");
                 httpQueryString = httpQueryString.replace("[poundsign]", "#");
 
                 boolean isFormatted = false;
