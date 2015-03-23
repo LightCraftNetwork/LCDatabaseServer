@@ -54,13 +54,20 @@ public class UtilFile {
             // Always close files.
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + fileName + "'");
+          //  System.out.println("Unable to open file '" + fileName + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + fileName + "'");
+         //   System.out.println("Error reading file '" + fileName + "'");
             // Or we could just do this:
             // ex.printStackTrace();
         }
         return line;
+    }
+    
+    public static void delete(String category, String key) {
+        String path = "data\\" + category.toLowerCase() + "\\" + key + ".lcdb-text";
+        File file = new File(path);
+        file.delete();
+        return;
     }
 
 }

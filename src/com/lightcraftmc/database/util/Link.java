@@ -9,6 +9,7 @@ public class Link {
         super();
         this.link = link;
         this.title = title;
+        link = link.replace("#", "[poundsign]");
     }
     
     public static Link seperator(){
@@ -23,6 +24,7 @@ public class Link {
 
     public void setLink(String link) {
         this.link = link;
+        link = link.replace("#", "[poundsign]");
     }
 
     public String getTitle() {

@@ -55,6 +55,12 @@ public class WebHandler extends Thread {
                 httpQueryString = httpQueryString.replace("%2F", "/");
                 httpQueryString = httpQueryString.replace("%40", "@");
                 httpQueryString = httpQueryString.replace("%23", "#");
+                httpQueryString = httpQueryString.replace("%24", "$");
+                httpQueryString = httpQueryString.replace("%3A", ":");
+                httpQueryString = httpQueryString.replace("%3F", "?");
+                httpQueryString = httpQueryString.replace("%3F", "?");
+                httpQueryString = httpQueryString.replace("%3D", "=");
+                httpQueryString = httpQueryString.replace("[poundsign]", "#");
 
                 boolean isFormatted = false;
                 if (httpQueryString.startsWith("formatted:")) {
@@ -92,10 +98,10 @@ public class WebHandler extends Thread {
     }
 
     public LoggedQuery sendResponse(int statusCode, String responseString, boolean isFile, LoggedQuery query) throws Exception {
-        sendResponse(statusCode, responseString, isFile);
         query.setResponseCode(statusCode);
         query.setResponse(responseString);
         query.setFile(isFile);
+        sendResponse(statusCode, responseString, isFile);
         return query;
     }
 

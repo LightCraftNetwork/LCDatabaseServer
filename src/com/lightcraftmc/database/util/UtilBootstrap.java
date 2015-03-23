@@ -109,9 +109,9 @@ public class UtilBootstrap {
         boolean blue = false;
         for (String categoryTitle : categories) {
             if (!blue) {
-                lines.add("<a href = \"" + linkPrefix + categoryTitle + "\" class=\"list-group-item\">" + categoryTitle + "</a>");
+                lines.add("<a href = \"" + linkPrefix + categoryTitle.replace("#", "!poundsign!") + "\" class=\"list-group-item\">" + categoryTitle + "</a>");
             } else {
-                lines.add("<a href = \"" + linkPrefix + categoryTitle + "\" class=\"list-group-item list-group-item-info\">" + categoryTitle + "</a>");
+                lines.add("<a href = \"" + linkPrefix + categoryTitle.replace("#", "!poundsign!") + "\" class=\"list-group-item list-group-item-info\">" + categoryTitle + "</a>");
             }
             blue = !blue;
         }
@@ -135,17 +135,12 @@ public class UtilBootstrap {
         ArrayList<String> lines = new ArrayList<String>();
         lines.add(Tag.tag("div class=\"panel panel-default\""));
         lines.add("<div class=\"panel-heading\">" + c.getName() + "</div>");
-        // lines.add("<div class=\"panel-body\">");
-        // lines.add("<p>This category has " + c.getItems().size() +
-        // " items.</p>");
-        // lines.add(Tag.close("div"));
         lines.add(Tag.tag("table class=\"table\""));
         lines.add("<tr><th><b><u>Key</u></b></th></tr></thead>");
         lines.add("<tbody>");
         for (File f : c.getItems()) {
             if (!f.isDirectory()) {
                 lines.add(Tag.open("tr"));
-                // lines.add("<th scope=\"row\">1</th>");
                 lines.add(Tag.open("td") + "<a href=\"/formatted:publicKey!!?query=retrieve%20" + c.getName() + "%20" + f.getName().replace(".lcdb-text", "") + "\">" + f.getName() + "</a>" + Tag.close("td"));
                 lines.add(Tag.close("tr"));
             }
@@ -160,10 +155,6 @@ public class UtilBootstrap {
         ArrayList<String> lines = new ArrayList<String>();
         lines.add(Tag.tag("div class=\"panel panel-default\""));
         lines.add("<div class=\"panel-heading\">" + "Subcategories of " + c.getName() + "</div>");
-        // lines.add("<div class=\"panel-body\">");
-        // lines.add("<p>This category has " + c.getItems().size() +
-        // " items.</p>");
-        // lines.add(Tag.close("div"));
         lines.add(Tag.tag("table class=\"table\""));
         lines.add("<tr><th>" + "<b><u>Name</u></b>" + "</th></tr></thead>");
         lines.add("<tbody>");
@@ -202,13 +193,11 @@ public class UtilBootstrap {
     public static ArrayList<String> containerOpen() {
         ArrayList<String> lines = new ArrayList<String>();
         lines.add(Tag.tag("div class=\"container\""));
-        // lines.add(Tag.open("pre"));
         return lines;
     }
 
     public static ArrayList<String> containerClose() {
         ArrayList<String> lines = new ArrayList<String>();
-        // lines.add(Tag.close("pre"));
         lines.add(Tag.close("div"));
         return lines;
     }

@@ -24,12 +24,13 @@ public class CommandList extends Command {
             } else {
                 look = "./data/" + args[0];
             }
+            look = look.replace("..", "");
             File file = new File(look);
-            String files = "SUCCESS: DIRECTORY LISTING OF " + look + "::\n";
+            String files = "SUCCESS: DIRECTORY LISTING OF " + look + "::";
             int counter = 0;
             for (File f : file.listFiles()) {
                 counter++;
-                files = files + f.getName().split(".txt")[0] + "\n";
+                files = files + f.getName().split(".txt")[0] + ",";
             }
             files = files + ":: (Total: " + counter + " file(s).) (Finished in " + (System.currentTimeMillis() - time) + " ms)";
             return files;

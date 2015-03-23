@@ -42,11 +42,6 @@ public class LCDatabaseServer {
         System.out.println("Manager has been created.");
         System.out.println("All arguments are parsed correctly. Starting server on port " + manager.getPort());
         manager.startServer();
-        /*
-         * if(!manager.isServerStarted()){
-         * System.out.println("Server has not been enabled! Check for errors!");
-         * System.exit(0); return; }
-         */
         CommandManager.initCommands();
         CommandInterpreter interpreter = new CommandInterpreter();
         interpreter.listen();

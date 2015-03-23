@@ -21,7 +21,6 @@ public class WebGraphicsHandler {
             }
             return handleCategoriesPage(query.split("-"), address);
         }
-        // boolean didSucceed = !response.startsWith("FAILED: ");
         response = response.replaceFirst("FAILED: ", "");
         response = response.replaceFirst("SUCCESS: ", "");
         ArrayList<String> lines = new ArrayList<String>();
@@ -30,7 +29,6 @@ public class WebGraphicsHandler {
         if (!LoginManager.getInstance().isLoggedIn(address)) {
             lines.addAll(UtilBootstrap.createError("You must sign in to access this page. The login page can be found <a href=\"/\">here</a>.</b></h5>"));
         }
-        // TODO format
         lines.addAll(UtilBootstrap.container("Results", "Query: " + query, response));
         lines.addAll(UtilBootstrap.containerOpen());
         lines.addAll(UtilBootstrap.generateTabs("Console"));
