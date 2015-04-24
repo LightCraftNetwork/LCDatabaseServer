@@ -21,7 +21,8 @@ public abstract class Command {
     /**
      * For use inside of
      */
-    String prepareCommandForRun(String ipAddress, boolean isLocal, String[] args, boolean isAdmin) {
+    @Deprecated
+    public String prepareCommandForRun(String ipAddress, boolean isLocal, String[] args, boolean isAdmin) {
         if (isRequiresLogin() && !isAdmin) {
             return "FAILED: You must be logged in to use that command!";
         }
@@ -29,6 +30,10 @@ public abstract class Command {
     }
 
     public abstract String runCommand(String ipAddress, boolean isLocal, String[] args, boolean isAdmin);
+
+    public String runCommandFromScript(String runner, String[] args) {
+        return runCommand("127.0.0.1", true, args, true);
+    }
 
     public String throwError(String error) {
         System.out.println("[COMMAND ERROR] " + error);

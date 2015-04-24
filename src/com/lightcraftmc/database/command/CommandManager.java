@@ -3,6 +3,7 @@ package com.lightcraftmc.database.command;
 import java.util.ArrayList;
 
 import com.lightcraftmc.database.commands.CommandDelete;
+import com.lightcraftmc.database.commands.CommandExecAs;
 import com.lightcraftmc.database.commands.CommandHelp;
 import com.lightcraftmc.database.commands.CommandInsert;
 import com.lightcraftmc.database.commands.CommandList;
@@ -28,11 +29,11 @@ public class CommandManager {
         getInstance().commands.add(new CommandHelp());
         getInstance().commands.add(new CommandInsert());
         getInstance().commands.add(new CommandRetrieve());
-        // TODO getInstance().commands.add(new CommandRetrieveFile());
         getInstance().commands.add(new CommandList());
         getInstance().commands.add(new CommandReload());
         getInstance().commands.add(new CommandLogin());
         getInstance().commands.add(new CommandDelete());
+        getInstance().commands.add(new CommandExecAs());
     }
 
 }

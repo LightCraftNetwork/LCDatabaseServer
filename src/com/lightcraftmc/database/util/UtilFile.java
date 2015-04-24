@@ -9,32 +9,46 @@ import java.io.PrintWriter;
 
 public class UtilFile {
 
-    public static void save(String category, String key, String value) {
-        String path = "data\\" + category.toLowerCase() + "\\" + key + ".lcdb-text";
+    public static void save(String category, String key, String value, String extension) {
+        String path = "data\\" + category.toLowerCase() + "\\" + key + extension;
         File file = new File(path);
         file.getParentFile().mkdirs();
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
         try {
             PrintWriter out = new PrintWriter(file.getAbsolutePath());
-            out.print(value.replace("\n", ">>NEWLN"));
+            out.print(value.replace("\n", "\\n"));
             out.flush();
             out.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
     }
 
+    public static void save(String category, String key, String value) {
+        save(category, key, ".lcdb-text");
+    }
+    
+    public static void saveScript(String category, String key, String value) {
+        save("scripts\\" + category, key, ".lcdb-scr");
+    }
+    
     public static String load(String category, String key) {
-        String path = "data\\" + category.toLowerCase() + "\\" + key + ".lcdb-text";
+        return load (category, key, ".lcdb-text");
+    }
+    
+    public static String loadScript(String category, String key) {
+        return load("scripts\\" + category, key, ".lcdb-scr");
+    }
+
+    public static String load(String category, String key, String extension) {
+        String path = "data\\" + category.toLowerCase() + "\\" + key + extension;
         File file = new File(path);
         String fileName = file.getAbsolutePath();
         String line = "";

@@ -7,6 +7,7 @@ public class LCDatabaseServer {
     private static int port = 0;
     private static String accessKey = "";
     private static Manager manager;
+    public static final CommandInterpreter interpreter = new CommandInterpreter();
 
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -43,7 +44,6 @@ public class LCDatabaseServer {
         System.out.println("All arguments are parsed correctly. Starting server on port " + manager.getPort());
         manager.startServer();
         CommandManager.initCommands();
-        CommandInterpreter interpreter = new CommandInterpreter();
         interpreter.listen();
 
     }

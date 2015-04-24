@@ -8,7 +8,6 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.util.HashMap;
 
 import com.lightcraftmc.database.LCDatabaseServer;
 
@@ -17,7 +16,6 @@ public class ServerHandler {
     ServerSocket Server = null;
     private WebServer ws = null;
     public String ip = "";
-    public HashMap<String, Boolean> checks = new HashMap<String, Boolean>();
 
     public boolean checkServer(String ip) {
         try {
@@ -41,7 +39,6 @@ public class ServerHandler {
             this.Server.close();
         } catch (IOException localIOException) {
         }
-        System.out.println("Disabled");
     }
 
     public String getExternalIP() {
@@ -72,7 +69,7 @@ public class ServerHandler {
             try {
                 if (checkServer(InetAddress.getLocalHost().getHostAddress())) {
                     System.out.println("Got IP: " + InetAddress.getLocalHost().getHostAddress());
-                    System.out.println("Warning: It is recommended that you port forward the port defined as only users on your Local Networkk can access the database!");
+                    System.out.println("Warning: It is recommended that you port forward the port defined as only users on your Local Network can access the database!");
                     this.ip = InetAddress.getLocalHost().getHostAddress();
                     return;
                 }
