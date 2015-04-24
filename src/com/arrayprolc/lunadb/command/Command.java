@@ -36,7 +36,7 @@ public abstract class Command {
     }
 
     public String throwError(String error) {
-        System.out.println("[COMMAND ERROR] " + error);
+        System.out.println("[Luna] [COMMAND ERROR] " + error);
         return "[COMMAND ERROR] " + error;
     }
 

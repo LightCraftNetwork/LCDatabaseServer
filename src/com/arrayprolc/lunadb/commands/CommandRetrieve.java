@@ -20,7 +20,7 @@ public class CommandRetrieve extends Command {
             String category = args[0].toLowerCase();
             String key = args[1];
             if (isLocal) {
-                System.out.println("[INFO] Retrieving value from " + category + " with key " + key + " (in " + (System.currentTimeMillis() - time) + " ms)");
+                System.out.println("[Luna] [INFO] Retrieving value from " + category + " with key " + key + " (in " + (System.currentTimeMillis() - time) + " ms)");
             }
             return UtilFile.load(category, key);
         } catch (Exception ex) {

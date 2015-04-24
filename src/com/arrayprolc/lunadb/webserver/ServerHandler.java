@@ -56,28 +56,28 @@ public class ServerHandler {
     }
 
     public void enable() {
-        System.out.println("Starting server");
+        System.out.println("[Luna] Starting server");
         (this.setWs(new WebServer(this))).start();
         try {
             String i = getExternalIP();
             if ((i != "") && (checkServer(i))) {
-                System.out.println("Got IP: " + InetAddress.getLocalHost().getHostAddress());
-                System.out.println("Warning: It is recommended that you port forward the port defined as only users on your Local Network can access the database!");
+                System.out.println("[Luna] Got IP: " + InetAddress.getLocalHost().getHostAddress());
+                System.out.println("[Luna] Warning: It is recommended that you port forward the port defined as only users on your Local Network can access the database!");
                 this.ip = InetAddress.getLocalHost().getHostAddress();
                 return;
             }
         } catch (UnknownHostException localUnknownHostException) {
             try {
                 if (checkServer(InetAddress.getLocalHost().getHostAddress())) {
-                    System.out.println("Got IP: " + InetAddress.getLocalHost().getHostAddress());
-                    System.out.println("Warning: It is recommended that you port forward the port defined as only users on your Local Network can access the database!");
+                    System.out.println("[Luna] Got IP: " + InetAddress.getLocalHost().getHostAddress());
+                    System.out.println("[Luna] Warning: It is recommended that you port forward the port defined as only users on your Local Network can access the database!");
                     this.ip = InetAddress.getLocalHost().getHostAddress();
                     return;
                 }
             } catch (UnknownHostException localUnknownHostException1) {
                 if (checkServer("localhost")) {
-                    System.out.println("Got IP: localhost");
-                    System.out.println("Warning: It is recommended that you port forward the port defined as other users cannot access the database!");
+                    System.out.println("[Luna] Got IP: localhost");
+                    System.out.println("[Luna] Warning: It is recommended that you port forward the port defined as other users cannot access the database!");
                     this.ip = "localhost";
                     return;
                 }

@@ -68,9 +68,9 @@ public class UtilFile {
             // Always close files.
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-          //  System.out.println("Unable to open file '" + fileName + "'");
+          //  System.out.println("[Luna] Unable to open file '" + fileName + "'");
         } catch (IOException ex) {
-         //   System.out.println("Error reading file '" + fileName + "'");
+         //   System.out.println("[Luna] Error reading file '" + fileName + "'");
             // Or we could just do this:
             // ex.printStackTrace();
         }

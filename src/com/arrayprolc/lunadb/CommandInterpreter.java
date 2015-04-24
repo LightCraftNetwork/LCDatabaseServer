@@ -56,7 +56,7 @@ public class CommandInterpreter {
 
             }
         }
-        System.out.println("[ERROR] Unknown command. Use \"help\" command to get a list of commands.");
+        System.out.println("[Luna] [ERROR] Unknown command. Use \"help\" command to get a list of commands.");
         return;
     }
 

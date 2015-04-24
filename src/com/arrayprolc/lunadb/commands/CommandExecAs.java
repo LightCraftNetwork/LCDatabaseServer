@@ -41,7 +41,7 @@ public class CommandExecAs extends Command {
     }
     
     public String interpret(String runner, String s) {
-        System.out.println("|" + s + "|");
+        System.out.println("[Luna] |" + s + "|");
         String commandName;
         String[] args;
         if (s.contains(" ")) {

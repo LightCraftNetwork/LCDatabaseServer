@@ -14,37 +14,37 @@ public class LunaDB {
     public void run(String[] args) {
         LegacyConverter.run();
         if (args.length != 2) {
-            System.out.println("REQUIRED ARGUMENTS: int:port accessKey");
+            System.out.println("[Luna] REQUIRED ARGUMENTS: int:port accessKey");
             System.exit(0);
             return;
         }
-        System.out.println("Beginning server start...");
+        System.out.println("[Luna] Beginning server start...");
         try {
-            System.out.println("Checking port...");
+            System.out.println("[Luna] Checking port...");
             port = Integer.parseInt(args[0]);
         } catch (Exception ex) {
             System.out.println(args[0] + " is not an integer. Please retry port with an integer.");
             System.exit(0);
             return;
         }
-        System.out.println("Port is OK.");
-        System.out.println("Checking access key.");
+        System.out.println("[Luna] Port is OK.");
+        System.out.println("[Luna] Checking access key.");
         String blockedChars = "?,!,=";
         for (String b : blockedChars.split(",")) {
             if (args[1].contains(b)) {
-                System.out.println("Access Key cannot include the following: " + blockedChars.replace("[comma]", ","));
+                System.out.println("[Luna] Access Key cannot include the following: " + blockedChars.replace("[comma]", ","));
                 System.exit(0);
                 return;
             }
         }
         accessKey = args[1];
-        System.out.println("Access key is OK.");
-        System.out.println("Setting up manager...");
+        System.out.println("[Luna] Access key is OK.");
+        System.out.println("[Luna] Setting up manager...");
         manager = new Manager();
         manager.setPort(port);
         manager.setAccessKey(accessKey);
-        System.out.println("Manager has been created.");
-        System.out.println("All arguments are parsed correctly. Starting server on port " + manager.getPort());
+        System.out.println("[Luna] Manager has been created.");
+        System.out.println("[Luna] All arguments are parsed correctly. Starting server on port " + manager.getPort());
         manager.startServer();
         CommandManager.initCommands();
         interpreter.listen();
