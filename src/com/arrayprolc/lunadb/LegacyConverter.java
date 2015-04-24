@@ -21,8 +21,9 @@ public class LegacyConverter {
         Scanner sc = new Scanner(System.in);
         sc.nextLine();
         sc.close();
+        System.out.println("Beginning convert...");
         FileWalker walker = new FileWalker();
-        walker.renameFile("data\\");
+        walker.renameFile("./data/");
     }
 
 }

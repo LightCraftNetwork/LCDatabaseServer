@@ -9,7 +9,7 @@ public class LunaDB {
     private static Manager manager;
     public static final CommandInterpreter interpreter = new CommandInterpreter();
     
-    public static double fileVer = 2.0d;
+    public static double fileVer = 2.01d;
 
     public static void main(String[] args) {
         LegacyConverter.run();
