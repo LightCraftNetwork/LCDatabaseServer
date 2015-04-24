@@ -41,7 +41,7 @@ public class Manager {
     }
 
     public void shutdownServer() {
-
+        handler.disable();
     }
 
     public void startServer() {
