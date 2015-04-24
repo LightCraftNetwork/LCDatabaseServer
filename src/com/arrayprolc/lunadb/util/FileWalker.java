@@ -46,7 +46,6 @@ public class FileWalker {
             if (f.isDirectory()) {
                 renameFile(f.getAbsolutePath());
             } else {
-                System.out.println(getFileExtension(f.getAbsolutePath()) + " IS EXTENSION");
                 if(getFileExtension(f.getAbsolutePath()).contains("lcdb-text")){
                     renameFileExtension(f.getAbsolutePath(), "luna-text");
                 }
