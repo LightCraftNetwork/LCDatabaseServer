@@ -7,11 +7,11 @@ public class LunaDB {
     private static int port = 0;
     private static String accessKey = "";
     private static Manager manager;
-    public static final CommandInterpreter interpreter = new CommandInterpreter();
+    public final CommandInterpreter interpreter = new CommandInterpreter();
     
     public static double fileVer = 2.03d;
 
-    public static void main(String[] args) {
+    public void run(String[] args) {
         LegacyConverter.run();
         if (args.length != 2) {
             System.out.println("REQUIRED ARGUMENTS: int:port accessKey");

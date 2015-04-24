@@ -16,7 +16,8 @@ public class ServerHandler {
     ServerSocket Server = null;
     private WebServer ws = null;
     public String ip = "";
-
+    
+    
     public boolean checkServer(String ip) {
         try {
             URL u = new URL("http://" + ip + ":" + LunaDB.getManager().getPort() + "/ping");
