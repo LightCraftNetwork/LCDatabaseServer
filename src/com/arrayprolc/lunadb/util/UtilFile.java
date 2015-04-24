@@ -32,19 +32,19 @@ public class UtilFile {
     }
 
     public static void save(String category, String key, String value) {
-        save(category, key, ".lcdb-text");
+        save(category, key, value, ".luna-text");
     }
     
     public static void saveScript(String category, String key, String value) {
-        save("scripts\\" + category, key, ".lcdb-scr");
+        save("scripts\\" + category, key, value, ".luna-scr");
     }
     
     public static String load(String category, String key) {
-        return load (category, key, ".lcdb-text");
+        return load (category, key, ".luna-text");
     }
     
     public static String loadScript(String category, String key) {
-        return load("scripts\\" + category, key, ".lcdb-scr");
+        return load("scripts\\" + category, key, ".luna-scr");
     }
 
     public static String load(String category, String key, String extension) {

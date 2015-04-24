@@ -8,8 +8,11 @@ public class LunaDB {
     private static String accessKey = "";
     private static Manager manager;
     public static final CommandInterpreter interpreter = new CommandInterpreter();
+    
+    public static double fileVer = 2.0d;
 
     public static void main(String[] args) {
+        LegacyConverter.run();
         if (args.length != 2) {
             System.out.println("REQUIRED ARGUMENTS: int:port accessKey");
             System.exit(0);
