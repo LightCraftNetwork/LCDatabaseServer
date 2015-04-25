@@ -25,6 +25,7 @@ public class CommandManager {
     }
 
     public static void initCommands() {
+        getInstance().commands.clear();
         getInstance().commands.add(new CommandStop());
         getInstance().commands.add(new CommandHelp());
         getInstance().commands.add(new CommandInsert());

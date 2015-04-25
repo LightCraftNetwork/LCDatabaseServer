@@ -8,12 +8,16 @@ public class LunaDB {
     private static String accessKey = "";
     private static Manager manager;
     public final CommandInterpreter interpreter = new CommandInterpreter();
-    
+
     public static double fileVer = 2.03d;
+
+    public static void main(String[] args) {
+        LunaStarter.main(args);
+    }
 
     public void run(String[] args) {
         LegacyConverter.run();
-        if (args.length != 2) {
+        if (args.length < 2) {
             System.out.println("[Luna] REQUIRED ARGUMENTS: int:port accessKey");
             System.exit(0);
             return;
@@ -46,8 +50,10 @@ public class LunaDB {
         System.out.println("[Luna] Manager has been created.");
         System.out.println("[Luna] All arguments are parsed correctly. Starting server on port " + manager.getPort());
         manager.startServer();
-        CommandManager.initCommands();
-        interpreter.listen();
+        if (args.length != 3) {
+            CommandManager.initCommands();
+            interpreter.listen();
+        }
 
     }
 
