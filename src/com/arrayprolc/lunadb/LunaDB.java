@@ -9,7 +9,7 @@ public class LunaDB {
     private static Manager manager;
     public final CommandInterpreter interpreter = new CommandInterpreter();
 
-    public static double fileVer = 2.03d;
+    public static double fileVer = 2.04d;
 
     public static void main(String[] args) {
         LunaStarter.main(args);

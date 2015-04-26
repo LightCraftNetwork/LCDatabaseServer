@@ -1,5 +1,7 @@
 package com.arrayprolc.lunadb;
 
+import java.io.File;
+
 import com.arrayprolc.lunadb.webserver.ServerHandler;
 import com.arrayprolc.lunadb.webserver.WebServer;
 
@@ -11,6 +13,15 @@ public class Manager {
     private boolean serverStarted = false;
     private WebServer server;
     private ServerHandler handler;
+    private File dataFile = new File("./data/");
+
+    public File getDataFile() {
+        return dataFile;
+    }
+
+    public void setDataFile(File dataFile) {
+        this.dataFile = dataFile;
+    }
 
     public int getPort() {
         return port;

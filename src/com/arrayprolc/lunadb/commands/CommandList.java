@@ -2,6 +2,7 @@ package com.arrayprolc.lunadb.commands;
 
 import java.io.File;
 
+import com.arrayprolc.lunadb.LunaDB;
 import com.arrayprolc.lunadb.command.Command;
 
 public class CommandList extends Command {
@@ -20,13 +21,13 @@ public class CommandList extends Command {
         try {
             String look = "";
             if (args[0].equalsIgnoreCase("@a")) {
-                look = "./data/";
+                look = LunaDB.getManager().getDataFile().getAbsolutePath();
             } else {
-                look = "./data/" + args[0];
+                look = LunaDB.getManager().getDataFile() + args[0];
             }
             look = look.replace("..", "");
             File file = new File(look);
-            String files = "SUCCESS: DIRECTORY LISTING OF " + look + "::";
+            String files = "SUCCESS: ";
             int counter = 0;
             for (File f : file.listFiles()) {
                 counter++;

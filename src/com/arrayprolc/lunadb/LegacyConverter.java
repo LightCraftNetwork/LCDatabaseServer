@@ -30,7 +30,7 @@ public class LegacyConverter {
     private static void convert() {
         System.out.println("[Luna] Beginning convert...");
         FileWalker walker = new FileWalker();
-        walker.renameFile("./data/");
+        walker.renameFile(LunaDB.getManager().getDataFile().getAbsolutePath());
     }
 
     public static void copy(File sourceLocation, File targetLocation) throws IOException {
