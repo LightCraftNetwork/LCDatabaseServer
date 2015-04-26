@@ -15,7 +15,7 @@ public class UtilFile {
     public static String SCRIPT_EXTENSION = ".luna-scr";
 
     public static void save(String category, String key, String value, String extension) {
-        String path = LunaDB.getManager().getDataFile() + category.toLowerCase() + "\\" + key + extension;
+        String path = "data\\" + category.toLowerCase() + "\\" + key + extension;
         File file = new File(path);
         file.getParentFile().mkdirs();
         if (!file.exists()) {
@@ -53,7 +53,8 @@ public class UtilFile {
     }
 
     public static String load(String category, String key, String extension) {
-        String path = LunaDB.getManager().getDataFile() + category.toLowerCase() + "\\" + key + extension;
+        String path = "data\\" + category.toLowerCase() + "/" + key + extension;
+        
         File file = new File(path);
         String fileName = file.getAbsolutePath();
         String line = "";
@@ -83,7 +84,7 @@ public class UtilFile {
     }
 
     public static void delete(String category, String key, String extension) {
-        String path = LunaDB.getManager().getDataFile() + category.toLowerCase() + "\\" + key + extension;
+        String path = "data\\" + category.toLowerCase() + "\\" + key + extension;
         File file = new File(path);
         file.delete();
         return;

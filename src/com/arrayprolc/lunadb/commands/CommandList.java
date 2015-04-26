@@ -2,7 +2,6 @@ package com.arrayprolc.lunadb.commands;
 
 import java.io.File;
 
-import com.arrayprolc.lunadb.LunaDB;
 import com.arrayprolc.lunadb.command.Command;
 
 public class CommandList extends Command {
@@ -21,9 +20,9 @@ public class CommandList extends Command {
         try {
             String look = "";
             if (args[0].equalsIgnoreCase("@a")) {
-                look = LunaDB.getManager().getDataFile().getAbsolutePath();
+                look = "./data/";
             } else {
-                look = LunaDB.getManager().getDataFile() + args[0];
+                look = "./data/" + args[0];
             }
             look = look.replace("..", "");
             File file = new File(look);
