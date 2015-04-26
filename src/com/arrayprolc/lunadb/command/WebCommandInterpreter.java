@@ -11,6 +11,7 @@ public class WebCommandInterpreter {
         return instance;
     }
 
+    @SuppressWarnings("deprecation")
     public String interpret(String s, String ip, boolean isAdmin) {
         String commandName;
         String[] args;

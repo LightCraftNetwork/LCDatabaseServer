@@ -1,7 +1,5 @@
 package com.arrayprolc.lunadb.commands;
 
-import java.io.File;
-
 import com.arrayprolc.lunadb.command.Command;
 
 public class CommandExec extends Command {
