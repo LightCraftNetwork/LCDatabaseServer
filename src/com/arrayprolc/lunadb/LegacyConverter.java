@@ -14,8 +14,8 @@ public class LegacyConverter {
 
     public static void run() {
         String s = UtilFile.load("@server", "version");
-        System.out.println("[Luna] Converting database to version " + LunaDB.fileVer + ". (and making a backup)");
         if (!s.equals(LunaDB.fileVer + "")) {
+            System.out.println("[Luna] Converting database to version " + LunaDB.fileVer + ". (and making a backup)");
             try {
                 copyDirectory(new File("./data/"), new File("./data-backup/"));
             } catch (IOException e) {
