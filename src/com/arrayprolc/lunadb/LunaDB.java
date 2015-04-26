@@ -1,13 +1,21 @@
 package com.arrayprolc.lunadb;
 
+import java.util.Scanner;
+
 import com.arrayprolc.lunadb.command.CommandManager;
 
+/**
+ * 
+ * @author Justin & Jacob
+ *
+ */
 public class LunaDB {
 
     private static int port = 0;
     private static String accessKey = "";
     private static Manager manager;
     public final CommandInterpreter interpreter = new CommandInterpreter();
+    public static final Scanner _SCANNER = new Scanner(System.in);
 
     public static double fileVer = 2.04d;
 

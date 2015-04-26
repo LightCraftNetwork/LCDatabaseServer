@@ -10,6 +10,11 @@ import java.io.OutputStream;
 import com.arrayprolc.lunadb.util.FileWalker;
 import com.arrayprolc.lunadb.util.UtilFile;
 
+/**
+ * 
+ * @author Justin
+ *
+ */
 public class LegacyConverter {
 
     public static void run() {

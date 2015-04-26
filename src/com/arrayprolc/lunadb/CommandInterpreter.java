@@ -1,7 +1,5 @@
 package com.arrayprolc.lunadb;
 
-import java.util.Scanner;
-
 import com.arrayprolc.lunadb.command.Command;
 import com.arrayprolc.lunadb.command.CommandManager;
 import com.arrayprolc.lunadb.webserver.ServerHandler;
@@ -14,14 +12,13 @@ public class CommandInterpreter {
     }
 
     @SuppressWarnings("resource")
-    public void listen() {
-        while (true) {
-            System.out.print("");
-            Scanner sc = new Scanner(System.in);
-            String s = sc.nextLine();
-            interpret(s);
-        }
-    }
+    public synchronized void listen() {
+        System.out.print("");
+        String s = LunaDB._SCANNER.nextLine();
+        interpret(s);
+        listen(); // Forces a command to be interpreted before trying to read
+           // the next one due to the synchronized modifier
+       }
 
     public void interpret(String s) {
         String commandName;

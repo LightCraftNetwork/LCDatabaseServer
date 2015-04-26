@@ -4,6 +4,11 @@ import com.arrayprolc.lunadb.command.Command;
 import com.arrayprolc.lunadb.util.UtilFile;
 import com.arrayprolc.lunadb.util.UtilQuery;
 
+/**
+ * 
+ * @author Justin
+ *
+ */
 public class CommandInsert extends Command {
 
     public CommandInsert() {
