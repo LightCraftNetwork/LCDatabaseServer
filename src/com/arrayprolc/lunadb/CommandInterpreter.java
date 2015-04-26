@@ -11,7 +11,6 @@ public class CommandInterpreter {
     public CommandInterpreter() {
     }
 
-    @SuppressWarnings("resource")
     public synchronized void listen() {
         System.out.print("");
         String s = LunaDB._SCANNER.nextLine();
@@ -21,6 +20,10 @@ public class CommandInterpreter {
        }
 
     public void interpret(String s) {
+        System.out.println(interpretString(s));
+    }
+    
+    public String interpretString(String s) {
         String commandName;
         String[] args;
         if (s.contains(" ")) {
@@ -33,29 +36,27 @@ public class CommandInterpreter {
         for (Command command : CommandManager.getInstance().commands) {
             if (command.getName().equalsIgnoreCase(commandName)) {
                 try {
-                    System.out.println(command.runCommand("127.0.0.1", true, args, true));
+                    return (command.runCommand("127.0.0.1", true, args, true));
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                return;
             }
         }
         for (Command command : CommandManager.getInstance().commands) {
             for (String subName : command.getSubNames()) {
                 try {
                     if (subName.equalsIgnoreCase(commandName)) {
-                        System.out.println(command.runCommand("127.0.0.1", true, args, true));
+                        return (command.runCommand("127.0.0.1", true, args, true));
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                return;
 
             }
         }
-        System.out.println("[Luna] [ERROR] Unknown command. Use \"help\" command to get a list of commands.");
-        return;
+        return ("[Luna] [ERROR] Unknown command. Use \"help\" command to get a list of commands.");
     }
+
 
     public String getArgs(String s) {
         String remove = s.split(" ")[0];

@@ -3,6 +3,7 @@ package com.arrayprolc.lunadb.command;
 import java.util.ArrayList;
 
 import com.arrayprolc.lunadb.commands.CommandDelete;
+import com.arrayprolc.lunadb.commands.CommandExec;
 import com.arrayprolc.lunadb.commands.CommandExecAs;
 import com.arrayprolc.lunadb.commands.CommandHelp;
 import com.arrayprolc.lunadb.commands.CommandInsert;
@@ -35,6 +36,7 @@ public class CommandManager {
         getInstance().commands.add(new CommandLogin());
         getInstance().commands.add(new CommandDelete());
         getInstance().commands.add(new CommandExecAs());
+        getInstance().commands.add(new CommandExec());
     }
 
 }

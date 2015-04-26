@@ -2,17 +2,21 @@ package com.arrayprolc.lunadb.webserver;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.URLDecoder;
+import java.nio.file.Files;
 import java.util.StringTokenizer;
 
 import com.arrayprolc.lunadb.LunaDB;
+import com.arrayprolc.lunadb.SetupQuestions;
 import com.arrayprolc.lunadb.WebGraphicsHandler;
 import com.arrayprolc.lunadb.command.WebCommandInterpreter;
 import com.arrayprolc.lunadb.logger.LoggedQuery;
 import com.arrayprolc.lunadb.login.LoginManager;
+import com.arrayprolc.lunadb.util.UtilFile;
 
 public class WebHandler extends Thread {
     private Socket client;
@@ -44,8 +48,31 @@ public class WebHandler extends Thread {
             LoggedQuery query = new LoggedQuery(client.getInetAddress(), httpQueryString, httpMethod);
 
             if (httpMethod.equals("GET")) {
+                httpQueryString = URLDecoder.decode(httpQueryString, "UTF-8");
+                if (httpQueryString.startsWith("/core")) {
+                    try {
+                        String s = UtilFile.exportResource(httpQueryString.split("/core")[1].replace("..", "").replace("\"", ""));
+                        query = this.sendResponse(200, s, true, query);
+                        Files.deleteIfExists(new File(s).toPath());
+                        return;
+                    } catch (Exception ex) {
+                        query = this.sendResponse(404, "FAILED: File not found.", false, query);
+                        return;
+                    }
+                }
                 if (httpQueryString.startsWith("/?")) {
                     httpQueryString = httpQueryString.replaceFirst("/?", "/formatted:publicKey!!#");
+                }
+                if (!SetupQuestions.isDoneWithQuestions()) {
+                    String s = SetupQuestions.send(httpQueryString);
+                    if (!s.equals("/")) {
+                        query = this.sendResponse(200, SetupQuestions.send(httpQueryString), true, query);
+                        return;
+                    }
+                    httpQueryString = "/";
+                }
+                if (httpQueryString.startsWith("/location-setup")) {
+                    httpQueryString = "/";
                 }
                 if (httpQueryString.equalsIgnoreCase("/")) {
                     httpQueryString = "/formatted:publicKey!!#login-page";
@@ -53,9 +80,7 @@ public class WebHandler extends Thread {
                 httpQueryString = httpQueryString.substring(1);
                 httpQueryString = httpQueryString.replace("?query=", "");
                 httpQueryString = httpQueryString.replace("+", " ");
-                httpQueryString = URLDecoder.decode(httpQueryString,"UTF-8");
                 httpQueryString = httpQueryString.replace("[poundsign]", "#");
-
                 boolean isFormatted = false;
                 if (httpQueryString.startsWith("formatted:")) {
                     isFormatted = true;

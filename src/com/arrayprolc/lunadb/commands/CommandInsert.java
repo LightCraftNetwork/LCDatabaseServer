@@ -25,6 +25,17 @@ public class CommandInsert extends Command {
             final String category = args[0].toLowerCase();
             final String key = args[1];
             String value = args[2];
+            if(value.contains("@search?")){
+                String result = "FAILED";
+                if(value.contains("?")){
+                    result = value.split("@search?")[1];
+                    if(result.contains(" ")){
+                        result = result.split(" ")[0];
+                    }
+                    //TODO This
+                }
+                
+            }
             if (value.startsWith("@api?")) {
                 value = value.substring(5);
                 final String v = value;
@@ -63,5 +74,4 @@ public class CommandInsert extends Command {
             return "FAILED: An error occured, please try again. || Usage: insert category key value (Please use _ in place of spaces.)";
         }
     }
-
 }
