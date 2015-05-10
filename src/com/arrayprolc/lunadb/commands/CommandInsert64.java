@@ -21,7 +21,7 @@ public class CommandInsert64 extends Command {
     @Override
     public String runCommand(String ip, boolean isLocal, String[] args, boolean isAdmin) {
         if (args.length == 0) {
-            return ("Usage: insert category key value (Please use _ in place of spaces.)");
+            return ("Usage: insert64 category key value (Please use Base64.)");
         }
         try {
             final String category = args[0].toLowerCase();

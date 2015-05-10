@@ -8,6 +8,7 @@ import com.arrayprolc.lunadb.commands.CommandExecAs;
 import com.arrayprolc.lunadb.commands.CommandHelp;
 import com.arrayprolc.lunadb.commands.CommandInsert;
 import com.arrayprolc.lunadb.commands.CommandInsert64;
+import com.arrayprolc.lunadb.commands.CommandInsertScript;
 import com.arrayprolc.lunadb.commands.CommandList;
 import com.arrayprolc.lunadb.commands.CommandLogin;
 import com.arrayprolc.lunadb.commands.CommandReload;
@@ -39,6 +40,7 @@ public class CommandManager {
         getInstance().commands.add(new CommandDelete());
         getInstance().commands.add(new CommandExecAs());
         getInstance().commands.add(new CommandExec());
+        getInstance().commands.add(new CommandInsertScript());
     }
 
 }
