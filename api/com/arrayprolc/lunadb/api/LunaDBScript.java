@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.apache.commons.codec.binary.Base64;
@@ -27,12 +28,26 @@ public class LunaDBScript {
 
     private String category;
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public String getPath() {
         return path;
     }
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public LunaDBScript(String path, String category) {
+        super();
+        this.path = path;
+        this.category = category;
     }
 
     public boolean send(LunaServer server, Class mainClass) {
