@@ -58,11 +58,12 @@ public class LunaServer {
         inquery = Base64.encodeBase64String(inquery.getBytes());
         String query = "execas " + programName.replace(",", "").replace(" ", "") + ",@icodec=base64,@rcodec=base64 " + inquery;
         query = URLEncoder.encode(query);
-        URL url = new URL("http://" + getIP() + "/" + getAccessKey() + "!!" + query.replace(" ", "%20"));
+        String u = "http://" + getIP() + "/" + getAccessKey() + "!!" + query.replace(" ", "%20");
+        URL url = new URL(u);
         URLConnection c = url.openConnection();
 
-        c.setConnectTimeout(500);
-        c.setReadTimeout(100);
+        c.setConnectTimeout(1000);
+        c.setReadTimeout(500);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
 

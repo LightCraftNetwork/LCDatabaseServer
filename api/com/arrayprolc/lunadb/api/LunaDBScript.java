@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import org.apache.commons.codec.binary.Base64;
@@ -28,6 +29,16 @@ public class LunaDBScript {
 
     private String category;
 
+    private String runName;
+
+    public String getRunName() {
+        return runName;
+    }
+
+    public void setRunName(String runName) {
+        this.runName = runName;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -40,39 +51,68 @@ public class LunaDBScript {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(String path, String runName) {
         this.path = path;
+        this.runName = runName;
     }
 
-    public LunaDBScript(String path, String category) {
+    public LunaDBScript(String path, String category, String runName) {
         super();
         this.path = path;
         this.category = category;
+        this.runName = runName;
     }
 
-    public boolean send(LunaServer server, Class mainClass) {
+    public boolean send(LunaServer server, Class mainClass) throws Exception {
         String builder = "";
         File f = getFile(mainClass);
         Scanner sc;
         try {
             sc = new Scanner(new FileInputStream(f));
         } catch (FileNotFoundException e) {
-            return false;
+            throw e;
         }
         while (sc.hasNext()) {
             builder += sc.nextLine() + "\n";
         }
         sc.close();
         builder = Base64.encodeBase64String(builder.getBytes());
-        String query = "insertscript " + category + " " + f.getName().replace(".luna-scr", "") + " " + builder;
+        String query = "insertscript " + category + " " + getRunName() + " " + builder;
         String result;
         try {
             result = server.query(query);
         } catch (Exception e) {
-            return false;
+            throw e;
         }
         deleteTemp();
         return result.startsWith("SUCCESS");
+    }
+
+    public ArrayList<String> run(LunaServer server) {
+        ArrayList<String> results = new ArrayList<String>();
+        String query = "exec " + category + " " + runName;
+        String result;
+        try {
+            result = server.query(query);
+        } catch (Exception e) {
+            results.add("<FAILED> " + Arrays.toString(e.getStackTrace()));
+            return results;
+        }
+        if (!result.startsWith("RESULTS: ")) {
+            results.add("<FAILED-FROMSERVER> " + result);
+            return results;
+        }
+        int s = 10;
+        result = result.substring(s);
+        result = result.substring(0, result.length() - 1);
+        for (String ss : result.split(", ")) {
+            results.add(ss);
+        }
+        return results;
+    }
+
+    private static String removeLastChar(String str) {
+        return str.substring(0, str.length() - 1);
     }
 
     private File getFile(Class mainClass) {

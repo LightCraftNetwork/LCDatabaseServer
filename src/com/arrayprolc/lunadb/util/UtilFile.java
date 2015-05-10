@@ -31,7 +31,9 @@ public class UtilFile {
         }
         try {
             PrintWriter out = new PrintWriter(file.getAbsolutePath());
-            out.print(value.replace("\n", "\\n"));
+            for(String s : value.split("\n")){
+                out.println(s);
+            }
             out.flush();
             out.close();
         } catch (FileNotFoundException e) {
