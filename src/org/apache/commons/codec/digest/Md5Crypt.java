@@ -101,6 +101,7 @@ public class Md5Crypt {
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
      */
+    @SuppressWarnings("deprecation")
     public static String apr1Crypt(final String keyBytes) {
         return apr1Crypt(keyBytes.getBytes(Charsets.UTF_8));
     }
@@ -122,6 +123,7 @@ public class Md5Crypt {
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
      */
+    @SuppressWarnings("deprecation")
     public static String apr1Crypt(final String keyBytes, final String salt) {
         return apr1Crypt(keyBytes.getBytes(Charsets.UTF_8), salt);
     }
@@ -176,6 +178,7 @@ public class Md5Crypt {
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught.
      */
+    @SuppressWarnings("deprecation")
     public static String md5Crypt(final byte[] keyBytes, final String salt, final String prefix) {
         final int keyLen = keyBytes.length;
 

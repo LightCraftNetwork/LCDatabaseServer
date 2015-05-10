@@ -130,6 +130,7 @@ public class Sha2Crypt {
      *             when a {@link NoSuchAlgorithmException} is caught
      * @see MessageDigestAlgorithms
      */
+    @SuppressWarnings("deprecation")
     private static String sha2Crypt(final byte[] keyBytes, final String salt, final String saltPrefix,
             final int blocksize, final String algorithm) {
 

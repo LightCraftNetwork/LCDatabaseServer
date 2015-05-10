@@ -110,6 +110,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
     /**
      * Default constructor, assumes default charset of {@link Charsets#UTF_8}
      */
+    @SuppressWarnings("deprecation")
     public QuotedPrintableCodec() {
         this(Charsets.UTF_8, false);
     }
@@ -121,6 +122,7 @@ public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, Strin
      *            if {@code true}, soft line breaks will be used
      * @since 1.10
      */
+    @SuppressWarnings("deprecation")
     public QuotedPrintableCodec(final boolean strict) {
         this(Charsets.UTF_8, strict);
     }

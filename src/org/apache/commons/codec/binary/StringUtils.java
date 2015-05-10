@@ -110,6 +110,7 @@ public class StringUtils {
      * @see <a href="http://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      * @see #getBytesUnchecked(String, String)
      */
+    @SuppressWarnings("deprecation")
     public static byte[] getBytesIso8859_1(final String string) {
         return getBytes(string, Charsets.ISO_8859_1);
     }
@@ -159,6 +160,7 @@ public class StringUtils {
      * @see <a href="http://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      * @see #getBytesUnchecked(String, String)
      */
+    @SuppressWarnings("deprecation")
     public static byte[] getBytesUsAscii(final String string) {
         return getBytes(string, Charsets.US_ASCII);
     }
@@ -177,6 +179,7 @@ public class StringUtils {
      * @see <a href="http://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      * @see #getBytesUnchecked(String, String)
      */
+    @SuppressWarnings("deprecation")
     public static byte[] getBytesUtf16(final String string) {
         return getBytes(string, Charsets.UTF_16);
     }
@@ -195,6 +198,7 @@ public class StringUtils {
      * @see <a href="http://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      * @see #getBytesUnchecked(String, String)
      */
+    @SuppressWarnings("deprecation")
     public static byte[] getBytesUtf16Be(final String string) {
         return getBytes(string, Charsets.UTF_16BE);
     }
@@ -213,6 +217,7 @@ public class StringUtils {
      * @see <a href="http://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      * @see #getBytesUnchecked(String, String)
      */
+    @SuppressWarnings("deprecation")
     public static byte[] getBytesUtf16Le(final String string) {
         return getBytes(string, Charsets.UTF_16LE);
     }
@@ -231,6 +236,7 @@ public class StringUtils {
      * @see <a href="http://download.oracle.com/javase/6/docs/api/java/nio/charset/Charset.html">Standard charsets</a>
      * @see #getBytesUnchecked(String, String)
      */
+    @SuppressWarnings("deprecation")
     public static byte[] getBytesUtf8(final String string) {
         return getBytes(string, Charsets.UTF_8);
     }
@@ -299,6 +305,7 @@ public class StringUtils {
      *             required by the Java platform specification.
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
+    @SuppressWarnings("deprecation")
     public static String newStringIso8859_1(final byte[] bytes) {
         return new String(bytes, Charsets.ISO_8859_1);
     }
@@ -315,6 +322,7 @@ public class StringUtils {
      *             required by the Java platform specification.
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
+    @SuppressWarnings("deprecation")
     public static String newStringUsAscii(final byte[] bytes) {
         return new String(bytes, Charsets.US_ASCII);
     }
@@ -331,6 +339,7 @@ public class StringUtils {
      *             required by the Java platform specification.
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
+    @SuppressWarnings("deprecation")
     public static String newStringUtf16(final byte[] bytes) {
         return new String(bytes, Charsets.UTF_16);
     }
@@ -347,6 +356,7 @@ public class StringUtils {
      *             required by the Java platform specification.
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
+    @SuppressWarnings("deprecation")
     public static String newStringUtf16Be(final byte[] bytes) {
         return new String(bytes, Charsets.UTF_16BE);
     }
@@ -363,6 +373,7 @@ public class StringUtils {
      *             required by the Java platform specification.
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
+    @SuppressWarnings("deprecation")
     public static String newStringUtf16Le(final byte[] bytes) {
         return new String(bytes, Charsets.UTF_16LE);
     }
@@ -379,6 +390,7 @@ public class StringUtils {
      *             required by the Java platform specification.
      * @since As of 1.7, throws {@link NullPointerException} instead of UnsupportedEncodingException
      */
+    @SuppressWarnings("deprecation")
     public static String newStringUtf8(final byte[] bytes) {
         return newString(bytes, Charsets.UTF_8);
     }

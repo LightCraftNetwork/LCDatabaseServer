@@ -259,6 +259,7 @@ public class UnixCrypt {
      *            plaintext password
      * @return a 13 character string starting with the salt string
      */
+    @SuppressWarnings("deprecation")
     public static String crypt(final String original) {
         return crypt(original.getBytes(Charsets.UTF_8));
     }
@@ -274,6 +275,7 @@ public class UnixCrypt {
      * @throws IllegalArgumentException
      *             if the salt does not match the allowed pattern
      */
+    @SuppressWarnings("deprecation")
     public static String crypt(final String original, final String salt) {
         return crypt(original.getBytes(Charsets.UTF_8), salt);
     }

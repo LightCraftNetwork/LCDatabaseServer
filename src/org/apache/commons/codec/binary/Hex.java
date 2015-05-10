@@ -42,6 +42,7 @@ public class Hex implements BinaryEncoder, BinaryDecoder {
      *
      * @since 1.7
      */
+    @SuppressWarnings("deprecation")
     public static final Charset DEFAULT_CHARSET = Charsets.UTF_8;
 
     /**

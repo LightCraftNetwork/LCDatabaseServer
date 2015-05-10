@@ -112,6 +112,7 @@ public class QCodec extends RFC1522Codec implements StringEncoder, StringDecoder
     /**
      * Default constructor.
      */
+    @SuppressWarnings("deprecation")
     public QCodec() {
         this(Charsets.UTF_8);
     }

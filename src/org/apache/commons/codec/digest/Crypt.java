@@ -145,6 +145,7 @@ public class Crypt {
      * @throws RuntimeException
      *             when a {@link java.security.NoSuchAlgorithmException} is caught. *
      */
+    @SuppressWarnings("deprecation")
     public static String crypt(final String key, final String salt) {
         return crypt(key.getBytes(Charsets.UTF_8), salt);
     }

@@ -52,6 +52,7 @@ public class BCodec extends RFC1522Codec implements StringEncoder, StringDecoder
     /**
      * Default constructor.
      */
+    @SuppressWarnings("deprecation")
     public BCodec() {
         this(Charsets.UTF_8);
     }
