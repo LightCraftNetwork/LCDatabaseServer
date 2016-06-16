@@ -28,7 +28,11 @@ public class LegacyConverter {
             }
             convert();
             System.out.println("[Luna] Done converting!");
+            try {
             UtilFile.save("@server", "version", LunaDB.fileVer + "");
+            }catch(Exception e) {
+                // Not a problem
+            }
         }
     }
 
